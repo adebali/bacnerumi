@@ -1,0 +1,6 @@
+{
+    "search.exclude": {
+        ".snakemake": true,
+        "logs/*": true
+    }
+}

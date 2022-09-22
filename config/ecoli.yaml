@@ -1,0 +1,100 @@
+
+sample: 
+  # - "A22DG_GGCTAC_S1"
+  # - "A33DG_CCGTCC_S2"
+  # - "B22DGI_CTTGTA_S3"
+  # - "B22DI_AGTCAA_S4"
+  # - "B33DGI_GTAGAG_S5"
+  # - "C22DMG_AGTTCC_S6"
+  # - "C33DI_GTCCGC_S7"
+  # - "D33DMG_GTGAAA_S8"
+  # - "DDDDD5_ACTGAT_S1"
+  # - "DDMDMG_GTTTCG_S2"
+  # - "DDMDMI_CGTACG_S3"
+  # - "DE33DMI_GTGGCC_S9"
+  # - "E22DMI_ATGTCA_S10"
+  # - "WTWT20_GGTAGC_S10"
+  # - "WWTWT5_GAGTGG_S11"
+  - "CPSWT"
+  - "CPSA3"
+  - "CPSUvrD"
+  - "CPSMA3"
+
+
+meta: 
+  CPSWT:
+    title: WT_R1
+    strain: WT
+    product: CPD
+    replicate: 1
+  CPSA3:
+    title: A3_R1
+    strain: lexA3
+    product: CPD
+    replicate: 1
+  CPSMA3:
+    title: mfdUvrDA3_R1
+    strain: lexA3_mfd_uvrD
+    product: CPD
+    replicate: 1
+  CPSUvrD:
+    title: uvrD_R1
+    strain: uvrD
+    product: CPD
+    replicate: 1
+
+
+    
+  # SRR13006715:
+  #   title: 00WT_05m_R1 
+  #   product: CPD
+  #   strain: WT
+  #   time: 5min
+  #   replicate: 1
+  # SRR13006716:
+  #   title: UvrD_05m_R1 
+  #   product: CPD
+  #   strain: UvrD
+  #   time: 5min
+  #   replicate: 2
+  # SRR12775234:
+  #   title: 00WT_05m_R2
+  #   product: CPD
+  #   strain: WT
+  #   time: 5min
+  #   replicate: 2
+  # SRR12775235:
+  #   title: UvrD_10m_R1 
+  #   product: CPD
+  #   strain: UvrD
+  #   time: 10min
+  #   replicate: 1
+
+srr: 
+  enabled: False
+  codes:
+    - ""
+
+# Genome parameters 
+
+genome_download: False
+
+bowtie2_build: True
+
+build: "nc0009133" 
+
+species: ""
+
+datatype: ""
+
+release: ""
+
+#######
+
+filter: "'^'"
+
+
+boquila:
+  run: True
+  seed: 1
+  sens: 4
