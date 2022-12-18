@@ -8,6 +8,5 @@ include: "workflow/rules/common.smk"
 
 rule all:
     input:
-        lambda w: allInput(config["build"], config["sample"], 
-            config["srr"]["enabled"], config["srr"]["codes"]),
+        lambda w: allInput(config)
  

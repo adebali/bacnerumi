@@ -3,63 +3,74 @@ import argparse
 import sys
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input", required=True, help="singleton fasta file")
-parser.add_argument("-l", "--length", required=True, help="read length file")
-parser.add_argument("-k", "--readlength", required=True, nargs="+", type=int, help="read length list")
-parser.add_argument("-o", "--output", default=sys.stdout,type=argparse.FileType('w'), help="FASTQ file with removed duplicates")
+parser.add_argument("-i", "--input", required=True, help="singleton fasta (.fa) or (.bed) file")
+parser.add_argument("-b", "--bed", required=True, help="bed file to get the read lengths")
+parser.add_argument("-o", "--output", default=sys.stdout,type=argparse.FileType('w'), help="bed output file")
 args = parser.parse_args()
 out = args.output
-readlengthList = args.readlength
-readLengthSet = set()
-for l in readlengthList:
-    readLengthSet.add(l)
+
+separator = '|'
+
+bedIn = open(args.bed, 'r')
 readLengthDict = {}
-lengthDistFile = args.length
-lengthIn = open(lengthDistFile, 'r')
-for line in lengthIn:
-    ll = line.rstrip().split('\t')
-    readLength = int(ll[0])
-    value = int(ll[1])
-    if readLength in readlengthList:
-        readLengthDict[readLength] = value
+readLengthSet = set()
+readCount = 0
+for line in bedIn:
+    ll = line.strip().split('\t')
+    readLength = int(ll[2]) - int(ll[1])
+    readLengthDict[readLength] = readLengthDict.get(readLength, 0) + 1
+    readLengthSet.add(readLength)
+    readCount += 1
 
-seqList = []
-headerList = []
-singletonCount = 0
 
-for line in open(args.input, 'r'):
-    if line.startswith('>'):
-        singletonCount += 1
-        header = line.rstrip()
-    else:
-        seq = line.rstrip()
-        headerList.append(header[1:])
-        seqList.append(seq)
+bedIn.close()
+masterDict = {}
 
-countDict = {}
+if args.input.endswith('.fa'):
+    fastaIn = open(args.input, 'r')
+    for line in fastaIn:
+        header = line.strip()[1:]
+        seq = fastaIn.readline().strip()
+        seqLen = len(seq)
+        masterDict[seqLen] = masterDict.get(seqLen, [])
+        masterDict[seqLen].append(header)
+    fastaIn.close()
+elif args.input.endswith('.bed'):
+    for line in open(args.input, 'r'):
+        hl = line.rstrip().split('\t')
+        header = separator.join([hl[0], hl[1], hl[2], hl[5]])
+        seqLen = int(hl[2]) - int(hl[1])
+        masterDict[seqLen] = masterDict.get(seqLen, [])
+        masterDict[seqLen].append(header)
+else:
+    assert "Unexpected file input"
+
+# if args.input.endswith('.fa'):
+#     for line in open(args.input, 'r'):
+#         if line.startswith('>'):
+#             singletonCount += 1
+#             header = line.rstrip()
+#         else:
+#             seq = line.rstrip()
+#             headerList.append(header[1:])
+#             seqList.append(seq)
+# elif args.input.endswith('.bed'):
+#     for line in open(args.input, 'r'):
+#         singletonCount += 1
+#         hl = line.rstrip().split('\t')
+#         header = separator.join([hl[0], hl[1], hl[2], hl[5]])
+#         headerList.append(header)
+
+
+selectedHeaders = []
 for readLength in readLengthDict.keys():
-    countDict[readLength] = 0
+    random.seed(int(readCount/readLength))
+    headerList = masterDict[readLength]
+    selectedHeaders += random.choices(headerList, k=readLengthDict[readLength])
+        
 
-randomNoList = []
-print(readLengthDict)
-print(singletonCount)
-random.seed(10)
-
-while True:
-    if len(seq) in readLengthSet:
-        no = random.randint(0, singletonCount-1)
-        seq = seqList[no]
-        countDict[len(seq)] = countDict.get(len(seq), 0) + 1
-        randomNoList.append(no)
-        print(countDict)
-        if countDict[len(seq)] == readLengthDict[readLength]:
-            readLengthSet.remove(readLength)
-            if len(readLengthSet) == 0:
-                break
-
-for no in randomNoList:
-    header = headerList[no]
-    hl = header.split('_')
+for header in selectedHeaders:
+    hl = header.split(separator)
     chromosome = hl[0]
     start = hl[1]
     end = hl[2]

@@ -23,7 +23,18 @@ rule bedGraphToBigWig:
         {{ echo "`date -R`: Process failed..."; rm {output}; exit 1; }}  ) > {log} 2>&1
         """
 
-
+use rule bedGraphToBigWig as bedGraphToBigWig_readLength with:
+    input:
+        bdg="results/{sample}/{sample}_{strand}_{readLength}.bdg",
+        index="resources/ref_genomes/{build}/genome.fa.fai",
+    output: "results/{sample}/{sample}_{strand}_{readLength}.bw", 
+        # report("results/{sample}/{sample}_{strand}_{readLength}.bw", 
+                # category="BigWig"),
+    log:
+        "logs/rule/analysis/{sample}/{sample}_bedGraphToBigWig_{strand}_{readLength}.log",
+    benchmark:
+        "logs/rule/analysis/{sample}/{sample}_bedGraphToBigWig_{strand}_{readLength}.benchmark.txt",
+  
 
 rule bedGraphToBigWig_sim:
     input:

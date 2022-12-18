@@ -1,3 +1,5 @@
+project_ = config['project']
+
 rule fastq2fa:
     input: rules.cutadapt_se.output.fastq
     output: "results/{sample}/{sample}_cut.fa"
@@ -61,6 +63,7 @@ rule nucleotide_table:
         workflow/scripts/fa2kmerAbundanceTable.py \
         -i {input.fasta} \
         -k 2 \
+        -n 13 \
         -l $length \
         -o {output.dinuc} &&
         echo "`date -R`: Success! Dinucleotide abundance table is calculated." ||
@@ -72,12 +75,82 @@ rule nucleotide_table:
         workflow/scripts/fa2kmerAbundanceTable.py \
         -i {input.fasta} \
         -k 1 \
+        -n 13 \
         -l $length \
         -o {output.nuc} &&
         echo "`date -R`: Success! Nucleotide abundance table is calculated." ||
         {{ echo "`date -R`: Nucleotide abundace table cannot be calculated..."; rm {output.nuc}; exit 1; }}  ) \
         > {log} 2>&1
         """
+
+
+rule nucleotide_table_forEachLength:
+    input:
+        fasta=rules.fastq2fa.output,
+    output:
+        nuc="results/{sample}/lengthSeparated/{sample}_{readLength}.txt",
+        dinuc="results/{sample}/lengthSeparated/{sample}_{readLength}_dinuc.txt",
+        organized_nuc="results/{sample}/lengthSeparated/{sample}_{readLength}_organized.txt",
+        organized_dinuc="results/{sample}/lengthSeparated/{sample}_{readLength}_dinuc_organized.txt",
+    params:
+        fields = lambda w: getSampleFields(config["meta"][w.sample])
+    log:
+        "logs/rule/analysis/{sample}/{sample}_nucleotide_{readLength}.log",
+    benchmark:
+        "logs/rule/analysis/{sample}/{sample}_nucleotide_{readLength}.benchmark.txt",
+    resources:
+        memory="16GB",
+        cpu=1
+    conda:
+        "../envs/plot_nuc.yaml"
+    shell:  
+        """
+        (echo "`date -R`: Calculating dinucleotide abundance table..." &&
+        workflow/scripts/fa2kmerAbundanceTable.py \
+        -i {input.fasta} \
+        -k 2 \
+        -l {wildcards.readLength} \
+        -o {output.dinuc} && \
+        Rscript workflow/scripts/nucleotideTableChangeFormat.r \
+        -i {output.dinuc} \
+        | awk '{{print $0, "\\t{params.fields}"}}' \
+        > {output.organized_dinuc} &&
+        echo "`date -R`: Success! Dinucleotide abundance table is calculated." ||
+        {{ echo "`date -R`: Dinucleotide abundace table cannot be calculated..."; rm {output.dinuc}; exit 1; }}  ) \
+        > {log} 2>&1
+
+        (echo "`date -R`: Calculating dinucleotide abundance table..." &&
+        workflow/scripts/fa2kmerAbundanceTable.py \
+        -i {input.fasta} \
+        -k 1 \
+        -l {wildcards.readLength} \
+        -o {output.nuc} && \
+        Rscript workflow/scripts/nucleotideTableChangeFormat.r \
+        -i {output.nuc} \
+        | awk '{{print $0, "\\t{params.fields}"}}' \
+        > {output.organized_nuc} &&
+        echo "`date -R`: Success! Nucleotide abundance table is calculated." ||
+        {{ echo "`date -R`: Nucleotide abundace table cannot be calculated..."; rm {output.nuc}; exit 1; }}  ) \
+        > {log} 2>&1
+        """
+
+rule merge_nucleotide_table_forEachLength:
+    input:
+        lambda w: input4mergeNucleotideContent(config),
+    output:
+        out=f"results/{project_}/nucleotide_content.tsv",
+    log: f"logs/rule/analysis/{project_}/nucleotide_content.log",
+    resources:
+        memory="16GB",
+        cpu=1
+    shell:  
+        """
+        (echo "`date -R`: Merge nucleotide content files..." &&
+        cat {input} > {output.out} &&
+        echo "`date -R`: Success!" || 
+        {{ echo "`date -R`: Process failed..."; rm {output.out}; exit 1; }} ) > {log} 2>&1
+        """
+
 
 
 rule plot_nuc:

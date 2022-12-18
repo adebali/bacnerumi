@@ -133,7 +133,8 @@ class fasta:
 			maxLength = max(maxLength,len(sequence))
 		return maxLength
 
-	def getKmerAbundance(self, kmer, firstNletters=None):
+	def getKmerAbundance(self, kmer, firstN, length):
+
 		nucleotides = 'ATGC'
 		subseqTupleList = itertools.product(nucleotides, repeat=int(kmer))
 		subseqList = sorted(list(subseqTupleList))
@@ -145,19 +146,23 @@ class fasta:
 					return False
 			return True
 
+
+		if firstN == None:
+			if length:
+				firstN = int(length)
+			else:
+				firstN = self.getMaxSeqLength()
+		else:
+			firstN = int(firstN)
+
 		def addSeqToPosDict(sequence, theDict):
-			for i in range(min(firstNletters,len(sequence)) - (kmer - 1)):
+			for i in range(min(firstN,len(sequence)) - (kmer - 1)):
 				subseq = sequence[i : i + kmer]
 				if subseqHasValidNucleotides(subseq):
-						 theDict[i + 1][subseq.upper()] += 1
-
-		if firstNletters == None:
-			firstNletters = self.getMaxSeqLength()
-		else:
-			firstNletters = int(firstNletters)
+						theDict[i + 1][subseq.upper()] += 1
 
 		positionDict = {}
-		for i in range(1, firstNletters + 1 - (kmer - 1)):
+		for i in range(1, firstN + 1 - (kmer - 1)):
 			positionDict[i] = {}
 			for subseq in subseqList:
 				positionDict[i][''.join(subseq)] = 0
@@ -168,12 +173,16 @@ class fasta:
 		for line in filein:
 			if line.startswith('>'):
 				header = line.strip()
-				addSeqToPosDict(seq, positionDict)
+				if length:
+					if len(seq) == int(length):
+						addSeqToPosDict(seq, positionDict)
 				seq = ''
 			else:
 				seq += line.strip()
 		else:
-			addSeqToPosDict(seq,positionDict)
+			if length:
+				if len(seq) == int(length):
+					addSeqToPosDict(seq, positionDict)
 
 		return positionDict
 

@@ -29,6 +29,7 @@ def fa2singletonList(fa):
     
 
 def fa2getSingletons(fastaFileName, out, bedoutputfile):
+    separator = '|'
     singletons = fa2singletonList(fastaFileName)
     filein = open(fastaFileName, 'r')
     bedout = open(bedoutputfile, 'w')
@@ -44,7 +45,7 @@ def fa2getSingletons(fastaFileName, out, bedoutputfile):
             sequence = line.strip()
             if sequence in singletons:
                 out.write('>' + header + '\n' + sequence + '\n')
-                hl = header.split('_')
+                hl = header.split(separator)
                 chromosome = hl[0]
                 start = hl[1]
                 end = hl[2]

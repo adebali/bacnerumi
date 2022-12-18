@@ -1,0 +1,10 @@
+cat CPSA3_CCAACA_S1_*_R1_001.fastq.gz > CPSA3.fastq.gz && gunzip CPSA3.fastq.gz
+cat CPSMA3_CTAGCT_S2_*_R1_001.fastq.gz > CPSMA3.fastq.gz && gunzip CPSMA3.fastq.gz
+cat CPSUvrD_CGGAAT_S3_*_R1_001.fastq.gz > CPSUvrD.fastq.gz && gunzip CPSUvrD.fastq.gz
+cat CPSWT_CATTTT_S4_*_R1_001.fastq.gz > CPSWT.fastq.gz && gunzip CPSWT.fastq.gz
+cat SmegMfdUMICPDR2_CTCAGA_S5_*_R1_001.fastq.gz > SmegMfdUMICPDR2.fastq.gz && gunzip SmegMfdUMICPDR2.fastq.gz
+cat SmegUvrDMfdUMIR1_TACAGC_S6_*_R1_001.fastq.gz > SmegUvrDMfdUMIR1.fastq.gz && gunzip SmegUvrDMfdUMIR1.fastq.gz
+cat SmegUvrDMfdUMIR2_TATAAT_S7_*_R1_001.fastq.gz > SmegUvrDMfdUMIR2.fastq.gz && gunzip SmegUvrDMfdUMIR2.fastq.gz
+cat SmegUvrDUMICPDR1_GACGAC_S8_*_R1_001.fastq.gz > SmegUvrDUMICPDR1.fastq.gz && gunzip SmegUvrDUMICPDR1.fastq.gz
+cat SmegUvrDUMICPDR2_TAATCG_S9_*_R1_001.fastq.gz > SmegUvrDUMICPDR2.fastq.gz && gunzip SmegUvrDUMICPDR2.fastq.gz
+cat SmegWTUMICPDR2_CTATAC_S10_*_R1_001.fastq.gz > SmegWTUMICPDR2.fastq.gz && gunzip SmegWTUMICPDR2.fastq.gz

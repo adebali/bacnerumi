@@ -4,7 +4,7 @@ rule samtools_index:
     input:
         f"resources/ref_genomes/{build_}/genome.fa",
     output:
-        f"resources/ref_genomes/{build_}/genome.fa.fai",
+        report(f"resources/ref_genomes/{build_}/genome.fa.fai",category="genome"),
     log:
         f"logs/rule/{build_}/faidx.log",
     benchmark:

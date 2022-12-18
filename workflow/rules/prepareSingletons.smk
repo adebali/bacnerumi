@@ -4,7 +4,7 @@ rule prepareSingletons:
     output:
         theoretical="resources/ref_genomes/{build}/theoreticalReads.fa",
         singletons="resources/ref_genomes/{build}/singletons.fa",
-        bedsingletons="resources/ref_genomes/{build}/singletons.bed",
+        bedsingletons=report("resources/ref_genomes/{build}/singletons.bed", category="genome"),
     log:
         "logs/rule/analysis/{build}/log/prepareSingletons.log",
     benchmark:
@@ -12,10 +12,12 @@ rule prepareSingletons:
     resources:
         memory="16GB",
         cpu=1
+    params:
+        kmerlist=config['readLength']
     shell:  
         """
         (echo "`date -R`: Preparing theoretical reads..." &&
-        python3 workflow/scripts/fa2theoreticalReads.py -i {input} > {output.theoretical} &&
+        python3 workflow/scripts/fa2theoreticalReads.py -i {input} -k {params.kmerlist} > {output.theoretical} &&
         echo "`date -R`: Success! Theoretical reads file is generated." || 
         {{ echo "`date -R`: Process failed..."; exit 1; }}  ) > {log} 2>&1
 

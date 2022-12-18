@@ -132,10 +132,46 @@ def input4mergeTSNTScounts(sampleList, srrEnabled, srrList):
         inputList.append(f"results/{sample}/{sample}_TSNTS.tsv")
     return inputList
 
+def input4mergeNucleotideContent(config):
+    inputList = []
+    for sample in config['sample']:
+        for readLength in config['readLengthForNucleotide']:
+            inputList.append(f"results/{sample}/lengthSeparated/{sample}_{readLength}_organized.txt")
+    return inputList
+
+def input4mergeLength(config):
+    inputList = []
+    for sample in config['sample']:
+        for readLength in config['readLengthForNucleotide']:
+            inputList.append(f"results/{sample}/{sample}_length.txt")
+    return inputList
+
+def input4mergeReplicates(config, strain, strand):
+    d = {}    
+    for sample in config['sample']:
+        strain_ = config['meta'][sample]['strain']
+        if strain_ in d.keys():
+            d[strain_].append(f"results/{sample}/{sample}_{strand}.bed")
+        else:
+            d[strain_] = [f"results/{sample}/{sample}_{strand}.bed"]
+    return d[strain]
+
 def input4mergeTSNTScounts_sim(sampleList, srrEnabled, srrList):
     inputList = []
     for sample in sampleList:
         inputList.append(f"results/{sample}/simulation/{sample}_TSNTS.tsv")
+    return inputList
+
+def input4mergeTSNTScounts_random(sampleList, srrEnabled, srrList):
+    inputList = []
+    for sample in sampleList:
+        inputList.append(f"results/{sample}/random/{sample}_TSNTS.tsv")
+    return inputList
+
+def input4mappableReads(sampleList):
+    inputList = []
+    for sample in sampleList:
+        inputList.append(f"results/{sample}/{sample}.bed")
     return inputList
 
 def input4nucTable():
@@ -224,34 +260,61 @@ def mappedReads(*files):
 
     return lineNumber
 
-def allInput(build, sampleList, srrEnabled, srrList):
+def allInput(config):
+
+    build = config["build"]
+    sampleList = config["sample"]
+    project = config['project']
+    strands = config['strand']
+    readLengths = config['readLength']
+    readLengthForNucleotide = config['readLengthForNucleotide']
+
+
+    strains = set()
+    for sample in sampleList:
+        strains.add(config['meta'][sample]['strain'])
 
     inputList = []
 
+    # gtf = report(f"resources/ref_genomes/{build}/genome.gtf", category="genome")
+
     # inputList.append(f"resources/ref_genomes/{build}/operons.bed") 
     inputList.append(f"resources/ref_genomes/{build}/singletons.bed") 
+    inputList.append(f"resources/ref_genomes/{build}/genome.gtf") 
+    inputList.append(f"results/{project}/mappableReads.bed") 
 
     duplications = ['nodedup', 'dedup']
 
     for sample in sampleList:
         sample_dir = f"results/{sample}/"
 
-        # if isSingle(sample, sampleList, srrEnabled, srrList, "resources/samples/"):
-        #     inputList.append(f"{sample_dir}{sample}.html")
-        # else:
-        #     inputList.append(f"{sample_dir}{sample}_1.html")
-        #     inputList.append(f"{sample_dir}{sample}_2.html")
         
         inputList.append(f"{sample_dir}{sample}_removedDup.fastq")
         inputList.append(f"{sample_dir}{sample}_cut.fastq")
         inputList.append(f"{sample_dir}{sample}_length_distribution.pdf")
         inputList.append(f"{sample_dir}{sample}_dinuc.pdf")
-        # inputList.append(f"{sample_dir}{sample}_sorted.bam")
-        # inputList.append(f"{sample_dir}{sample}_TSNTS.tsv")
-        # inputList.append(f"{sample_dir}{sample}_pos.bw")
-        # inputList.append(f"{sample_dir}{sample}_neg.bw")
-        # inputList.append('results/readCountsTSNTS.tsv')
-        
+        inputList.append(f"{sample_dir}{sample}_sorted.bam")
+        inputList.append(f"{sample_dir}{sample}_TSNTS.tsv")
+        inputList.append(f"{sample_dir}{sample}_report.txt")
+        # inputList.append(f"{sample_dir}uniq/{sample}.bed")
+        inputList.append(f"{sample_dir}{sample}_bedLength.txt")
+        inputList.append(f"{sample_dir}random/{sample}_random.bed")
+        inputList.append(f"results/{project}/readCountsTSNTS.tsv")
+        inputList.append(f"results/{project}/random/readCountsTSNTS.tsv")
+        inputList.append(f"results/{project}/mappable_TSNTS.tsv")
+        inputList.append(f"results/{project}/nucleotide_content.tsv")
+        inputList.append(f"results/{project}/length.tsv")
+        inputList.append(f"{sample_dir}{sample}_TSNTS.tsv")
+        for strand in strands:
+            inputList.append(f"{sample_dir}{sample}_{strand}.bw")
+            for strain in list(strains):
+                inputList.append(f"results/mergedReplicates/{strain}_{strand}.bw")
+            
+            # for readLength in readLengths:
+            #     inputList.append(f"{sample_dir}lengthSeparated/{sample}_{strand}_{readLength}.bw")
+        # for readLength in readLengthForNucleotide:
+        #     inputList.append(f"{sample_dir}lengthSeparated/{sample}_{readLength}_organized.txt")
+        #     inputList.append(f"{sample_dir}lengthSeparated/{sample}_{readLength}_dinuc_organized.txt")
 
         # for duplication in duplications:
             # inputList.append(f"{sample_dir}{sample}_{duplication}_sorted_nucleotideTable.pdf")
@@ -295,6 +358,9 @@ def chromosome():
     chromosome = initialTwo + '_' + keyword[2:] + '.1'
     return chromosome
 
+
+
+
 wildcard_constraints:
     duplicate='dedup|nodedup'
 
@@ -323,8 +389,8 @@ include: "nucleotide_table.smk"
 
 include: "align.smk"
 include: "bed2geneCounts_tsnts.smk"
-
-
+include: "report_stats.smk"
+include: "check_presence.smk"
 # include: "bedGraphToBigWig.smk"
 # include: "simulation.smk"
 # include: "nucleotide_table_sim.smk"

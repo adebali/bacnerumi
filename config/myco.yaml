@@ -1,83 +1,89 @@
 
 sample: 
-  # - "SRR13006716"
-  # - "SRR13006715"
-  # - "SRR12775235"
-  # - "SRR12775234"
-  # - "SmegMfd5minCPDR1_ATCACG_S3_L001_R1_001"
-  # - "SmegWT5minCPDR2_TTAGGC_S7_L001_R1_001"
-  # - "SmegUvrDMfdCPDR2_ACTTGA_S5_L001_R1_001"
-  # - "SmegMfd5minCPDR2_TGACCA_S1_L001_R1_001"
-  # - "SmegUvrDMfdCPDR1_CAGATC_S4_L001_R1_001"
-  # - "SmegUvrD5mnCPDR1_ACAGTG_S2_L001_R1_001"
-  # - "SmegWT5minCPDR1_CGATGT_S6_L001_R1_001"
-  # - "SmegUvrD5mnCPDR2_GCCAAT_S3_L001_R1_001"
-    # - "SmegMfd5minCPDR1_ATCACG_S19_R1_001"
-    # - "SmegMfd5minCPDR2_TGACCA_S20_R1_001"
-    # - "SmegUvrD5mnCPDR1_ACAGTG_S21_R1_001"
-    # - "SmegUvrD5mnCPDR2_GCCAAT_S22_R1_001"
-    # - "SmegUvrDMfdCPDR1_CAGATC_S23_R1_001"
-    # - "SmegUvrDMfdCPDR2_ACTTGA_S24_R1_001"
-    # - "SmegWT5minCPDR1_CGATGT_S25_R1_001"
-    # - "SmegWT5minCPDR2_TTAGGC_S26_R1_001"
-  - "SmegWTUMICPDR1"
-  - "SmegWTUMICPDR2"
-  - "SmegMfdUMICPDR1"
-  - "SmegMfdUMICPDR2"
-  - "SmegUvrDUMICPDR1"
-  - "SmegUvrDUMICPDR2"
-  - "SmegUvrDMfdUMIR1"
-  - "SmegUvrDMfdUMIR2"
+  - "SmgMfdUMIndCPDR1"
+  - "SmgMfdUMIndCPDR2"
+  - "SmgUvrDUMInCPDR1"
+  - "SmgUvrDUMInCPDR2"
+  - "SmgWTUMInduCPDR1"
+  - "SmgWTUMInduCPDR2"
+  - "SmUvrMfdUMInCPD1"
+  - "SmUvrMfdUMInCPD2"
+
+readLength:
+  - "12"
+
+readLengthForNucleotide:
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+
+strand:
+  - "plus"
+  - "minus"
 
 meta: 
-  SmegWTUMICPDR1:
-    title: WT_5m_R1
+  SmgWTUMInduCPDR1:
+    title: WTind_5m_R1
     product: CPD
     strain: WT
     time: 5min
+    induced: True
     replicate: 1
-  SmegWTUMICPDR2:
-    title: WT_5m_R2
+  SmgWTUMInduCPDR2:
+    title: WTind_5m_R2
     product: CPD
     strain: WT
     time: 5min
-    replicate: 2
-  SmegMfdUMICPDR1:
-    title: Mfd_5m_R1
+    induced: True
+    replicate: 2  
+  SmgMfdUMIndCPDR1:
+    title: MfdInd_5m_R1
     product: CPD
     strain: mfd
     time: 5min
+    induced: True
     replicate: 1
-  SmegMfdUMICPDR2:
-    title: Mfd_5m_R2
+  SmgMfdUMIndCPDR2:
+    title: MfdInd_5m_R2
     product: CPD
     strain: mfd
     time: 5min
+    induced: True
     replicate: 2
-  SmegUvrDUMICPDR1:
-    title: uvrD_5m_R1
+  SmgUvrDUMInCPDR1:
+    title: uvrDind_5m_R1
     product: CPD
     strain: uvrD
     time: 5min
+    induced: True
     replicate: 1
-  SmegUvrDUMICPDR2:
-    title: uvrD_5m_R2
+  SmgUvrDUMInCPDR2:
+    title: uvrDind_5m_R2
     product: CPD
     strain: uvrD
     time: 5min
+    induced: True
     replicate: 2
-  SmegUvrDMfdUMIR1:
-    title: uvrDmfd_5m_R1
+  SmUvrMfdUMInCPD1:
+    title: uvrDmfdInd_5m_R1
     product: CPD
     strain: uvrD_mfd
     time: 5min
+    induced: True
     replicate: 1
-  SmegUvrDMfdUMIR2:
-    title: uvrDmfd_5m_R2
+  SmUvrMfdUMInCPD2:
+    title: uvrDmfdInd_5m_R2
     product: CPD
     strain: uvrD_mfd
     time: 5min
+    induced: True
     replicate: 2
+
+
+
 
 
 srr: 
@@ -93,6 +99,7 @@ bowtie2_build: True
 
 # build: "nzCP054795" 
 build: "CP001663" 
+project: "myco"
 
 species: ""
 

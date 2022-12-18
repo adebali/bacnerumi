@@ -82,6 +82,7 @@ genome_download: False
 bowtie2_build: True
 
 build: "nc0009133" 
+project: "ecoli"
 
 species: ""
 

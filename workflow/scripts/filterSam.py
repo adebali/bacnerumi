@@ -8,6 +8,7 @@ parser.add_argument("-o", "--output", default=sys.stdout,type=argparse.FileType(
 parser.add_argument("-f", "--fasta", help="fasta file with coordinates in header")
 args = parser.parse_args()
 fastaFile = args.fasta
+separator = '|'
 
 def getReverseComplement(seq):
     def getComplementBase(base):
@@ -34,7 +35,7 @@ seqDict = {}
 for line in fasta_in:
     if line.startswith('>'):
         header = line.strip()
-        hl = header.split('_')
+        hl = header.split(separator)
         chromosome = hl[0]
         start = hl[1]
         end = hl[2]
