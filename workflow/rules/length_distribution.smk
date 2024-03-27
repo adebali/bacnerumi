@@ -41,6 +41,8 @@ rule fastq2length:
     resources:
         memory="4GB",
         cpu=1
+    conda:
+        "../envs/plot_nuc.yaml"
     shell:  
         re.sub(' +', ' ',
         """

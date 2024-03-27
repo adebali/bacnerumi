@@ -1,0 +1,15 @@
+
+sample: 
+  - SRR1173967
+  - SRR1173968
+
+meta: 
+  SRR1173967:
+    title: LB04_1
+    replicate: 1
+  SRR1173968:
+    title: LB04_2
+    replicate: 2
+ 
+build: "nc0009133" 
+project: "ecoli"

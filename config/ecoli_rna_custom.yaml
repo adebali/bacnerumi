@@ -1,0 +1,79 @@
+
+sample: 
+  - A1WG
+  - A1WI
+  - A1MG
+  - A1MI
+  - A1DG
+  - A1DI
+  - B2WG
+  - B2WI
+  - B2MG
+  - B2MI
+  - B2DG
+  - B2DI
+
+meta: 
+  A1WG:
+    title: WT_G_1
+    strain: WT
+    replicate: 1
+    treatment: "Glucose"
+  A1WI:
+    title: WT_I_1
+    strain: WT
+    replicate: 1
+    treatment: "IPTG"
+  A1MG:
+    title: mfd_G_1
+    strain: mfd
+    replicate: 1
+    treatment: "Glucose"
+  A1MI:
+    title: mfd_I_1
+    strain: mfd
+    replicate: 1
+    treatment: "IPTG"
+  A1DG:
+    title: uvrD_G_1
+    strain: uvrD
+    replicate: 1
+    treatment: "Glucose"
+  A1DI:
+    title: uvrD_I_1
+    strain: uvrD
+    replicate: 1
+    treatment: "IPTG"
+  B2WG:
+    title: WT_G_2
+    strain: WT
+    replicate: 2
+    treatment: "Glucose"
+  B2WI:
+    title: WT_I_2
+    strain: WT
+    replicate: 2
+    treatment: "IPTG"
+  B2MG:
+    title: mfd_G_2
+    strain: mfd
+    replicate: 2
+    treatment: "Glucose"
+  B2MI:
+    title: mfd_I_2
+    strain: mfd
+    replicate: 2
+    treatment: "IPTG"
+  B2DG:
+    title: uvrD_G_2
+    strain: uvrD
+    replicate: 2
+    treatment: "Glucose"
+  B2DI:
+    title: uvrD_I_2
+    strain: uvrD
+    replicate: 2
+    treatment: "IPTG"
+
+build: "nc0009133" 
+project: "ecoli_rna_custom"

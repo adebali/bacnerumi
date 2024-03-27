@@ -3,7 +3,6 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - bowtie2 ==2.2.5  
   - samtools ==1.10
-  - bedtools =2.29.0
-  - ucsc-bedgraphtobigwig =377
-  - pybedtools =0.9.1
+  - tophat ==2.0.14

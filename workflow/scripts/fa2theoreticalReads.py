@@ -1,16 +1,17 @@
 import argparse
 import sys
+import re
 
 def getReverseComplement(seq):
     def getComplementBase(base):
-        complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
+        complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N':'N'}
         if base in complement.keys():
-            return complement[base]
+            return complement[base.upper()]
         return base
     reverse_complement = "".join(getComplementBase(base) for base in reversed(seq))
     return reverse_complement
 
-def fa2theoreticalReads(filein, out, kmerSizeList, desiredCondition, desiredConditionReverse):
+def fa2theoreticalReads(filein, out, kmerSizeList, dinucleotide):
     separator = '|'
     seq = ''
     header = ''
@@ -30,29 +31,23 @@ def fa2theoreticalReads(filein, out, kmerSizeList, desiredCondition, desiredCond
         seq = d[header]
 
         for k in kmerSizeList:
+            fiveprime_length = str(k-5)
+            motifString = "^.{1," + fiveprime_length + "}" + dinucleotide + ".{3}$"
+            motif = re.compile(motifString)
             for i in range(0,len(seq)-k):
                 read = seq[i:i+k]
-                if desiredCondition(read):
+                if motif.match(read):
                     out.write('>' + chromosome + separator + str(i) + separator + str(i+k) + separator + '+' + '\n' + read.upper() + '\n')
-                if desiredConditionReverse(read):
+                if motif.match(getReverseComplement(read)):
                     out.write('>' + chromosome + separator + str(i) + separator + str(i+k) + separator + '-' + '\n' + getReverseComplement(read).upper() + '\n')
     out.close()
 
-def desiredCondition(seq):
-    if seq[-4].upper() == 'T' and seq[-5].upper() == 'T':
-        return True
-    return False
-
-def desiredConditionReverse(seq):
-    if seq[3].upper() == 'A' and seq[4].upper() == 'A':
-        return True
-    return False
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input", default=sys.stdin, type=argparse.FileType('r'), help="Genome file in FASTA format")
 parser.add_argument("-o", "--output", default=sys.stdout,type=argparse.FileType('w'), help="Theoretical reads in fasta format")
 parser.add_argument('-k','--kmer', nargs='+', help='<Required> kmer length list', type=int, required=True)
+parser.add_argument('-d','--dinucleotide', default='TT', help='Dipyrimidine nucleotides', type=str)
 args = parser.parse_args()
 
-# kmerSizeList = [10, 11, 12, 13]
-fa2theoreticalReads(args.input, args.output, args.kmer, desiredCondition, desiredConditionReverse)
+fa2theoreticalReads(args.input, args.output, args.kmer, args.dinucleotide)

@@ -43,7 +43,7 @@ rule bowtie2_se:
 rule bam2bed_se:
     input:
         bam= rules.bowtie2_se.output.bam,
-        fasta="resources/ref_genomes/" + config["build"] + "/singletons.fa"
+        fasta= lambda w: "resources/ref_genomes/" + config["build"] + "/singletons_" + config['meta'][w.sample]['damageSite'] + ".fa" 
     output:
         bed="results/{sample}/{sample}.bed",
         bam="results/{sample}/{sample}_sorted.bam",
@@ -95,32 +95,81 @@ rule fixTo12:
     shell:
         """
             (echo "`date -R`: Filtering bed file to clip last nucleotide of 13 mer" && 
-            awk '{{if($3 - $2 == 12 || $3 - $2 == 13) print}}' {input} |  awk '{{if ($3 - $2 == 13 && $6 == "+") $3 = int($3) - 1; else if ($3 - $2 == 13 && $6 == "-") $2 = int($2) + 1; print}}' > {output} &&
+            awk -F'\\t' '{{if($3 - $2 == 12 || $3 - $2 == 13) print}}' {input} |  awk -F'\\t' '{{if ($3 - $2 == 13 && $6 == "+") $3 = int($3) - 1; else if ($3 - $2 == 13 && $6 == "-") $2 = int($2) + 1; print$ 1"\\t"$2"\\t"$3"\\t"$4"\\t"$5"\\t"$6}}' > {output} &&
             echo "`date -R`: Success! We clipped last nuc of 13mer." || 
             {{ echo "`date -R`: Process failed..."; rm {output}; exit 1; }}  ) >> {log} 2>&1
         """
 
-rule randombed:
+# rule randombed:
+#     input: 
+#         bed=rules.fixTo12.output,
+#         singleton = lambda w: getDamageSiteMappable(w.sample),
+#         # singleton="results/" + config["project"] + "/mappableReads.bed",
+#         # singleton="resources/ref_genomes/" + config["build"] + "/singletons.fa",
+#     output: "results/{sample}/random/{sample}_randomMappable.bed",
+#     log:
+#         "logs/rule/analysis/{sample}/{sample}_randombed.log",
+#     benchmark:
+#         "logs/rule/analysis/{sample}/{sample}_randombed.benchmark.txt",
+#     resources:
+#         memory="16GB",
+#         cpu=1
+#     shell:  
+#         """
+#         (echo "`date -R`: Processing bed file to get random headers..." && 
+#         python3 workflow/scripts/random_reads.py -i {input.singleton} -b {input.bed} | sort -k2n > {output} &&
+#         echo "`date -R`: Success! We obtained the random bed file." || 
+#         {{ echo "`date -R`: Process failed..."; rm {output}; exit 1; }}  ) >> {log} 2>&1
+#     """
+
+rule randombed5:
     input: 
         bed=rules.fixTo12.output,
-        singleton="results/" + config["project"] + "/mappableReads.bed",
-        # singleton="resources/ref_genomes/" + config["build"] + "/singletons.fa",
-    output: "results/{sample}/random/{sample}_randomMappable.bed",
+        singleton = lambda w: getDamageSiteMappable(w.sample),
+        genes=f"resources/ref_genomes/{build_}/genes.bed",
+    output: "results/{sample}/random/{sample}_TSNTS.tsv",
+    params:
+        fields = lambda w: getSampleFields(config["meta"][w.sample]),
     log:
-        "logs/rule/analysis/{sample}/{sample}_randombed.log",
+        "logs/rule/analysis/{sample}/{sample}_randombed5.log",
     benchmark:
-        "logs/rule/analysis/{sample}/{sample}_randombed.benchmark.txt",
+        "logs/rule/analysis/{sample}/{sample}_randombed5.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
-    shell:  
+    conda: "../envs/bedtools.yaml"
+    shell: 
+        re.sub(' +', ' ', 
         """
-        (echo "`date -R`: Processing bed file to get random headers..." && 
-        python3 workflow/scripts/random_reads.py -i {input.singleton} -b {input.bed} | sort -k2n > {output} &&
-        echo "`date -R`: Success! We obtained the random bed file." || 
+        (echo "`date -R`: Processing bed file to get random headers and TS NTS values..." && 
+        python3 workflow/scripts/random_reads_5.py -i {input.singleton} -g {input.genes} -b {input.bed} | 
+        awk '{{print $0, "\\t{params.fields}"}}' \
+        > {output} &&
+        echo "`date -R`: Success! We obtained the random TSNTS file." || 
         {{ echo "`date -R`: Process failed..."; rm {output}; exit 1; }}  ) >> {log} 2>&1
-    """
+        """
+        )
 
+# rule randombed_original:
+#     input: 
+#         bed=rules.bam2bed_se.output.bed,
+#         singleton="results/" + config["project"] + "/mappableReads.bed",
+#         # singleton="resources/ref_genomes/" + config["build"] + "/singletons.fa",
+#     output: "results/{sample}/random/{sample}_randomMappableOri.bed",
+#     log:
+#         "logs/rule/analysis/{sample}/{sample}_randombed.log",
+#     benchmark:
+#         "logs/rule/analysis/{sample}/{sample}_randombed.benchmark.txt",
+#     resources:
+#         memory="16GB",
+#         cpu=1
+#     shell:  
+#         """
+#         (echo "`date -R`: Processing bed file to get random headers..." && 
+#         python3 workflow/scripts/random_reads.py -i {input.singleton} -b {input.bed} | sort -k2n > {output} &&
+#         echo "`date -R`: Success! We obtained the random bed file." || 
+#         {{ echo "`date -R`: Process failed..."; rm {output}; exit 1; }}  ) >> {log} 2>&1
+#     """
 
 # rule uniqbed:
 #     input: 
@@ -144,9 +193,35 @@ rule randombed:
 #     """
 
 
-rule sep_strands:
+# rule sep_strands:
+#     input:
+#         rules.fixTo12.output,
+#     output:
+#         plus="results/{sample}/{sample}_plus.bed",
+#         minus="results/{sample}/{sample}_minus.bed",
+#     log:
+#         "logs/rule/analysis/{sample}/{sample}_sepStrands.log",
+#     benchmark:
+#         "logs/rule/analysis/{sample}/{sample}_sepStrands.benchmark.txt",
+#     resources:
+#         memory="16GB",
+#         cpu=1
+#     shell:  
+#         """
+#         (echo "`date -R`: Separating plus stranded reads..." &&
+#         awk '{{if($6=="+"){{print}}}}' {input} > {output.plus} &&
+#         echo "`date -R`: Success! Reads are separated." || 
+#         {{ echo "`date -R`: Process failed..."; rm {output.plus}; exit 1; }}  )  > {log} 2>&1
+
+#         (echo "`date -R`: Separating minus stranded reads..." &&
+#         awk '{{if($6=="-"){{print}}}}' {input} > {output.minus} &&
+#         echo "`date -R`: Success! Reads are separated." || 
+#         {{ echo "`date -R`: Process failed..."; rm {output.minus}; exit 1; }}  )  >> {log} 2>&1
+#         """
+
+rule sep_strands_original:
     input:
-        rules.fixTo12.output,
+        rules.bam2bed_se.output.bed,
     output:
         plus="results/{sample}/{sample}_plus.bed",
         minus="results/{sample}/{sample}_minus.bed",
@@ -226,26 +301,27 @@ rule length_dist_eachLength:
 #         "logs/rule/analysis/{sample}/{sample}_{readLength}_sepByLength_minus.benchmark.txt",
 
 
-use rule sep_strands as sep_strands_sim with:
-    input: 
-        "results/{sample}/simulation/{sample}.bed"
-    output:
-        plus="results/{sample}/simulation/{sample}_plus.bed",
-        minus="results/{sample}/simulation/{sample}_minus.bed",
-    log:
-        "logs/rule/analysis/{sample}/simulation/{sample}_sepStrands.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/simulation/{sample}_sepStrands.benchmark.txt",
+# use rule sep_strands as sep_strands_sim with:
+#     input: 
+#         "results/{sample}/simulation/{sample}.bed"
+#     output:
+#         plus="results/{sample}/simulation/{sample}_plus.bed",
+#         minus="results/{sample}/simulation/{sample}_minus.bed",
+#     log:
+#         "logs/rule/analysis/{sample}/simulation/{sample}_sepStrands.log",
+#     benchmark:
+#         "logs/rule/analysis/{sample}/simulation/{sample}_sepStrands.benchmark.txt",
 
 rule genomecov:
     input:
-        bed="results/{sample}/{sample}_{strand}.bed", 
+        bed="results/{sample}/{sample}_{strand}.bed",
         ref_genome_index=rules.samtools_index.output,
     output:
-        bdg=temp("results/{sample}/{sample}_{strand}.bdg"),
-        bw="results/{sample}/{sample}_{strand}.bw",
+        bdg="results/{sample}/{sample}_{strand}.bdg",
+        bw=report("results/{sample}/{sample}_{strand}.bw", category="bigwig"),
     params:
-        read=lambda w, input: mappedReads(input['bed']),
+        read=lambda w, input: mappedReads(str(input['bed'])),
+        bwtitle=lambda w: f'results/{project_}/bigwig/' + getTitle(w.sample) + f'_{w.strand}.bw',
     log:
         "logs/rule/analysis/{sample}/{sample}_{strand}_genomeCov.log",
     benchmark:
@@ -266,9 +342,10 @@ rule genomecov:
         -scale $(echo {params.read} | awk '{{print 1000000/$1}}') \
         > {output.bdg} \
         && \
-        bedGraphToBigWig {output.bdg} {input.ref_genome_index} {output.bw} &&
+        bedGraphToBigWig {output.bdg} {input.ref_genome_index} {output.bw} && \
+        cp {output.bw} {params.bwtitle} &&
         echo "`date -R`: Success! Genome coverage for located damaged is calculated." || 
-        echo "`date -R`: Process failed...") > {log} 2>&1
+        echo "`date -R`: Process failed...") > {log} 2>&1 
         """
         )
 
@@ -342,13 +419,13 @@ use rule genomecov as genomecov_readlength with:
     benchmark:
         "logs/rule/analysis/{sample}/{sample}_{strand}_{readLength}_genomeCov.benchmark.txt",
 
-rule mappableReads:
-    input: input4mappableReads(config['sample'])
-    output: f'results/{project_}/mappableReads.bed'
+rule mappableReads_TT:
+    input: input4mappableReadsForDamageSite(config['sample'], 'TT')
+    output: f'results/{project_}/mappableReads_TT.bed'
     log:
-        "logs/rule/mappableReads.log",
+        "logs/rule/mappableReads_TT.log",
     benchmark:
-        "logs/rule/mappableReads.benchmark.txt",
+        "logs/rule/mappableReads_TT.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -361,6 +438,14 @@ rule mappableReads:
         echo "`date -R`: Process failed...") > {log} 2>&1
         """
         )
+
+use rule mappableReads_TT as mappableReads_TC with:
+    input: input4mappableReadsForDamageSite(config['sample'], 'TC')
+    output: f'results/{project_}/mappableReads_TC.bed'
+    log:
+        "logs/rule/mappableReads_TC.log",
+    benchmark:
+        "logs/rule/mappableReads_TC.benchmark.txt",
 
 # use rule genomecov_plus as genomecov_minus with:
 #     input:

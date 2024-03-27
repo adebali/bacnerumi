@@ -2,13 +2,13 @@ rule prepareSingletons:
     input:
         "resources/ref_genomes/{build}/genome.fa",
     output:
-        theoretical="resources/ref_genomes/{build}/theoreticalReads.fa",
-        singletons="resources/ref_genomes/{build}/singletons.fa",
-        bedsingletons=report("resources/ref_genomes/{build}/singletons.bed", category="genome"),
+        theoretical="resources/ref_genomes/{build}/theoreticalReads_{damageSite}.fa",
+        singletons="resources/ref_genomes/{build}/singletons_{damageSite}.fa",
+        bedsingletons=report("resources/ref_genomes/{build}/singletons_{damageSite}.bed", category="genome"),
     log:
-        "logs/rule/analysis/{build}/log/prepareSingletons.log",
+        "logs/rule/analysis/{build}/log/prepareSingletons_{damageSite}.log",
     benchmark:
-        "logs/rule/analysis/{build}/log/prepareSingletons.benchmark.txt",
+        "logs/rule/analysis/{build}/log/prepareSingletons_{damageSite}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -17,7 +17,7 @@ rule prepareSingletons:
     shell:  
         """
         (echo "`date -R`: Preparing theoretical reads..." &&
-        python3 workflow/scripts/fa2theoreticalReads.py -i {input} -k {params.kmerlist} > {output.theoretical} &&
+        python3 workflow/scripts/fa2theoreticalReads.py -i {input} -k {params.kmerlist} -d {wildcards.damageSite} > {output.theoretical} &&
         echo "`date -R`: Success! Theoretical reads file is generated." || 
         {{ echo "`date -R`: Process failed..."; exit 1; }}  ) > {log} 2>&1
 

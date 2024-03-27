@@ -120,6 +120,10 @@ def input4computeMatrix():
         inputList.append(f"results/{{samples}}/{{samples}}_{{build}}_{{duplicate}}_sorted_located_{strand}.bw")        
     return inputList
 
+def getTitle(sample_name):
+    sample = config["meta"][sample_name]
+    return sample['title']
+
 def input4computeMatrix_sim():
     inputList = []
     for strand in ["plus", "minus"]:
@@ -137,6 +141,19 @@ def input4mergeNucleotideContent(config):
     for sample in config['sample']:
         for readLength in config['readLengthForNucleotide']:
             inputList.append(f"results/{sample}/lengthSeparated/{sample}_{readLength}_organized.txt")
+    return inputList
+
+def input4mergeUnifyReads(config):
+    inputList = []
+    for sample in config['sample']:
+        inputList.append(f"results/{sample}/{sample}_plus_shifted_uniq.bed")
+        inputList.append(f"results/{sample}/{sample}_minus_shifted_uniq.bed")
+    return inputList
+
+def input4mergeSiteCounts(config):
+    inputList = []
+    for sample in config['sample']:
+        inputList.append(f"results/{sample}/{sample}_siteCounts.tsv")
     return inputList
 
 def input4mergeLength(config):
@@ -174,6 +191,17 @@ def input4mappableReads(sampleList):
         inputList.append(f"results/{sample}/{sample}.bed")
     return inputList
 
+def input4mappableReadsForDamageSite(sampleList, damageSite):
+    inputList = []
+    for sample in sampleList:
+        if config['meta'][sample]['damageSite'] == damageSite:
+            inputList.append(f"results/{sample}/{sample}.bed")
+    return inputList
+
+def getDamageSiteMappable(sample):
+    return "results/" + config["project"] + "/mappableReads_" + config['meta'][sample]['damageSite'] + ".bed",
+
+
 def input4nucTable():
     return "results/{sample}/{sample}_lengthMode.fa"
 
@@ -188,6 +216,10 @@ def getMotif(sample, product):
 
     elif product.lower() == "na":
         return "'.{10}'"
+
+def getSingletonFileForDamageSite(damageSite):
+    return "singletons_" + damageSite + '.fa'
+    
 
 def getDinuc(sample, product):
 
@@ -235,30 +267,66 @@ def getInput(sample, inputExist, inputList, inputIdx, sampleList, build):
     else:
         return f"resources/ref_genomes/{build}/genome.ron" 
 
-def lineNum(file):
-    
-    linenum = 0
-    if os.path.exists(file):
-        with open(file) as f:
-            for line in f:
-                linenum += 1
+# def lineNum(file):
+#     print(type(file))
+#     linenum = 0
+#     if os.path.exists(file):
+#         with open(file) as f:
+#             for line in f:
+#                 linenum += 1
+#     else: 
+#         direct=os.getcwd()
+#         filefullpath = os.path.join(direct, str(file))
+#         warnMessage = (f"\n{file} file does not exist!\n" + 
+#             "It is expected if this is a dry-run. The file will be produced " + 
+#             f"after the execution.\n{filefullpath}")
+#         warnings.warn(warnMessage)
 
-    warnMessage = (f"\n{file} file is either empty or does not exists!\n" + 
-        "It is expected if this is a dry-run. The file will be produced " + 
-        "after the execution.")
+    # if linenum == 0:
+    #     warnMessage = (f"\n{file} file is empty or does not exists!\n" + 
+    #     "It is expected if this is a dry-run. The file will be produced " + 
+    #     "after the execution.")
+    #     warnings.warn(warnMessage)
 
-    if linenum == 0:
-        warnings.warn(warnMessage)
+    # return linenum
 
-    return linenum
+
 
 def mappedReads(*files):
+    def _count_generator(reader):
+        b = reader(1024 * 1024)
+        while b:
+            yield b
+            b = reader(1024 * 1024)
 
-    lineNumber = 0
-    for file in files:
-        lineNumber += lineNum(str(file))
+    totalLines = 0
+    for singleFile in files:
+        if os.path.exists(singleFile):
+            with open(singleFile, 'rb') as fp:
+                c_generator = _count_generator(fp.raw.read)
+                count = sum(buffer.count(b'\n') for buffer in c_generator)
+                totalLines += count
+        else:
+            warnMessage = (f"\n{singleFile} file does not exist!\n" + 
+            "It is expected if this is a dry-run. The file will be produced " + 
+            f"after the execution.\n")
+            warnings.warn(warnMessage)
 
-    return lineNumber
+    if totalLines == 0:
+        warnMessage = (f"\n{singleFile} file is empty or does not exists!\n" + 
+        "It is expected if this is a dry-run. The file will be produced " + 
+        "after the execution.")
+        warnings.warn(warnMessage)
+
+    return totalLines
+
+# def mappedReads(*files):
+
+#     lineNumber = 0
+#     for myfile in files:
+#         lineNumber += lineNum(str(myfile.encode('utf-8').strip()))
+
+#     return lineNumber
 
 def allInput(config):
 
@@ -279,36 +347,53 @@ def allInput(config):
     # gtf = report(f"resources/ref_genomes/{build}/genome.gtf", category="genome")
 
     # inputList.append(f"resources/ref_genomes/{build}/operons.bed") 
-    inputList.append(f"resources/ref_genomes/{build}/singletons.bed") 
-    inputList.append(f"resources/ref_genomes/{build}/genome.gtf") 
-    inputList.append(f"results/{project}/mappableReads.bed") 
+    mergedDamageSites = ''
+    for damageSite in config['damageSites']:
+        inputList.append(f"resources/ref_genomes/{build}/singletons_{damageSite}.bed") 
+        inputList.append(f"results/{project}/mappable_{damageSite}_TSNTS.tsv") 
+        mergedDamageSites += damageSite
 
-    duplications = ['nodedup', 'dedup']
+    inputList.append(f"results/{project}/mappable_{mergedDamageSites}_TSNTS.tsv") 
+    # inputList.append(f"resources/ref_genomes/{build}/genome.gtf") 
+    # inputList.append(f"results/{project}/mappableReads_TT.bed") 
+    # inputList.append(f"results/{project}/mappableReads_TC.bed") 
+    # inputList.append(f"results/{project}/mappable_TT_TSNTS.tsv") 
+    # inputList.append(f"results/{project}/mappable_TC_TSNTS.tsv") 
+
+    # inputList.append("results/lexA3_G_1m_64PP_1/random/lexA3_G_1m_64PP_1_fix12.bed")
+
+    inputList.append(f"results/{project}/random/readCountsTSNTS.tsv")
+    inputList.append(f"results/{project}/unified.bed")
+    inputList.append(f"results/{project}/readCountsTSNTS.tsv")
+    inputList.append(f"results/{project}/nucleotide_content.tsv")
+    inputList.append(f"results/{project}/length.tsv")
+    inputList.append(f"results/{project_}/siteCounts.tsv")
 
     for sample in sampleList:
         sample_dir = f"results/{sample}/"
+        title =returnItself(config["meta"][sample]["title"])
 
-        
-        inputList.append(f"{sample_dir}{sample}_removedDup.fastq")
-        inputList.append(f"{sample_dir}{sample}_cut.fastq")
+        # inputList.append(f"{sample_dir}{sample}_removedDup.fastq")
+        # inputList.append(f"{sample_dir}{sample}_cut.fastq")
         inputList.append(f"{sample_dir}{sample}_length_distribution.pdf")
         inputList.append(f"{sample_dir}{sample}_dinuc.pdf")
-        inputList.append(f"{sample_dir}{sample}_sorted.bam")
-        inputList.append(f"{sample_dir}{sample}_TSNTS.tsv")
+        # inputList.append(f"{sample_dir}{sample}_sorted.bam")
+        # inputList.append(f"{sample_dir}{sample}_TSNTS.tsv")
         inputList.append(f"{sample_dir}{sample}_report.txt")
+        # inputList.append(f"{sample_dir}{sample}_bedLength.txt")
+        inputList.append(f"{sample_dir}{sample}_siteCounts.tsv")
+
+
         # inputList.append(f"{sample_dir}uniq/{sample}.bed")
-        inputList.append(f"{sample_dir}{sample}_bedLength.txt")
-        inputList.append(f"{sample_dir}random/{sample}_random.bed")
-        inputList.append(f"results/{project}/readCountsTSNTS.tsv")
-        inputList.append(f"results/{project}/random/readCountsTSNTS.tsv")
-        inputList.append(f"results/{project}/mappable_TSNTS.tsv")
-        inputList.append(f"results/{project}/nucleotide_content.tsv")
-        inputList.append(f"results/{project}/length.tsv")
-        inputList.append(f"{sample_dir}{sample}_TSNTS.tsv")
+        # inputList.append(f"{sample_dir}random/{sample}_random.bed")
+
+
         for strand in strands:
-            inputList.append(f"{sample_dir}{sample}_{strand}.bw")
-            for strain in list(strains):
-                inputList.append(f"results/mergedReplicates/{strain}_{strand}.bw")
+            inputList.append(f"results/{sample}/{sample}_{strand}.bw")
+            inputList.append(f"results/{sample}/{sample}_{strand}_shifted.bed")
+            # if project == 'myco':
+            #     for strain in list(strains):
+            #         inputList.append(f"results/mergedReplicates/{strain}_{strand}.bw")
             
             # for readLength in readLengths:
             #     inputList.append(f"{sample_dir}lengthSeparated/{sample}_{strand}_{readLength}.bw")
@@ -389,6 +474,8 @@ include: "nucleotide_table.smk"
 
 include: "align.smk"
 include: "bed2geneCounts_tsnts.smk"
+include: "bed2siteCounts.smk"
+include: "bed2shiftedBed.smk"
 include: "report_stats.smk"
 include: "check_presence.smk"
 # include: "bedGraphToBigWig.smk"

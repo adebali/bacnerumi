@@ -54,34 +54,33 @@ rule bed2geneCounts_tsnts:
         """
         )
 
-use rule bed2geneCounts_tsnts as bed2geneCounts_tsnts_random with:
+# use rule bed2geneCounts_tsnts as bed2geneCounts_tsnts_random with:
+#     input:
+#         reads=rules.randombed.output,
+#         genes=f"resources/ref_genomes/{build_}/genes.bed",
+#     output:
+#         TS=temp("results/{sample}/random/{sample}_TS.tsv"),
+#         NTS=temp("results/{sample}/random/{sample}_NTS.tsv"),
+#         mergedTSNTS="results/{sample}/random/{sample}_TSNTS.tsv",
+#     log:
+#         "logs/rule/analysis/{sample}/{sample}_bed2geneTSNTScounts_random.log",
+#     benchmark:
+#         "logs/rule/analysis/{sample}/{sample}_bed2geneTSNTScounts_random.benchmark.txt",
+#     params:
+#         fields = lambda w: getSampleFields(config["meta"][w.sample])
+
+rule bed2geneCounts_tsnts_mappable_TT:
     input:
-        reads=rules.randombed.output,
+        reads=rules.mappableReads_TT.output,
         genes=f"resources/ref_genomes/{build_}/genes.bed",
     output:
-        TS=temp("results/{sample}/random/{sample}_TS.tsv"),
-        NTS=temp("results/{sample}/random/{sample}_NTS.tsv"),
-        mergedTSNTS="results/{sample}/random/{sample}_TSNTS.tsv",
+        TS=temp(f"results/{project_}/mappable_TT_TS.tsv"),
+        NTS=temp(f"results/{project_}/mappable_TT_NTS.tsv"),
+        mergedTSNTS=f"results/{project_}/mappable_TT_TSNTS.tsv",
     log:
-        "logs/rule/analysis/{sample}/{sample}_bed2geneTSNTScounts_random.log",
+        f"logs/rule/analysis/{project_}/mappable_TT_bed2geneTSNTScounts_random.log",
     benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bed2geneTSNTScounts_random.benchmark.txt",
-    params:
-        fields = lambda w: getSampleFields(config["meta"][w.sample])
-
-
-rule bed2geneCounts_tsnts_mappable:
-    input:
-        reads=rules.mappableReads.output,
-        genes=f"resources/ref_genomes/{build_}/genes.bed",
-    output:
-        TS=temp(f"results/{project_}/mappable_TS.tsv"),
-        NTS=temp(f"results/{project_}/mappable_NTS.tsv"),
-        mergedTSNTS=f"results/{project_}/mappable_TSNTS.tsv",
-    log:
-        f"logs/rule/analysis/{project_}/mappable_bed2geneTSNTScounts_random.log",
-    benchmark:
-        f"logs/rule/analysis/{project_}/mappable_bed2geneTSNTScounts_random.benchmark.txt",
+        f"logs/rule/analysis/{project_}/mappable_TT_bed2geneTSNTScounts_random.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],
@@ -118,6 +117,33 @@ rule bed2geneCounts_tsnts_mappable:
 
         """
         )
+
+use rule bed2geneCounts_tsnts_mappable_TT as bed2geneCounts_tsnts_mappable_TC with:
+    input:
+        reads=rules.mappableReads_TC.output,
+        genes=f"resources/ref_genomes/{build_}/genes.bed",
+    output:
+        TS=temp(f"results/{project_}/mappable_TC_TS.tsv"),
+        NTS=temp(f"results/{project_}/mappable_TC_NTS.tsv"),
+        mergedTSNTS=f"results/{project_}/mappable_TC_TSNTS.tsv",
+    log:
+        f"logs/rule/analysis/{project_}/mappable_TC_bed2geneTSNTScounts_random.log",
+    benchmark:
+        f"logs/rule/analysis/{project_}/mappable_TC_bed2geneTSNTScounts_random.benchmark.txt"
+
+
+use rule bed2geneCounts_tsnts_mappable_TT as bed2geneCounts_tsnts_mappable_TTTC with:
+    input:
+        reads=[rules.mappableReads_TT.output,rules.mappableReads_TC.output],
+        genes=f"resources/ref_genomes/{build_}/genes.bed",
+    output:
+        TS=temp(f"results/{project_}/mappable_TTTC_TS.tsv"),
+        NTS=temp(f"results/{project_}/mappable_TTTC_NTS.tsv"),
+        mergedTSNTS=f"results/{project_}/mappable_TTTC_TSNTS.tsv",
+    log:
+        f"logs/rule/analysis/{project_}/mappable_TTTC_bed2geneTSNTScounts_random.log",
+    benchmark:
+        f"logs/rule/analysis/{project_}/mappable_TTTC_bed2geneTSNTScounts_random.benchmark.txt",
 
 
 rule mergeTSNTScounts:

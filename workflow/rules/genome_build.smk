@@ -21,6 +21,7 @@ rule genome_build:
         bowtie2-build  \
         {input} \
         {params.base} &&
+        cp {input} {params.base}.fa &&
         echo "`date -R`: Success! Indexes are build." || 
         {{ echo "`date -R`: Process failed..."; exit 1; }}  ) > {log} 2>&1
         """

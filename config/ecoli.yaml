@@ -1,73 +1,947 @@
+build: "nc0009133" 
+# project: "ecoli_mfd"
+# project: "ecoli_WIC"
+# project: "ecoli_WSI"
+# project: "ecoli_SFTT"
+project: "ecoli_all"
 
 sample: 
-  # - "A22DG_GGCTAC_S1"
-  # - "A33DG_CCGTCC_S2"
-  # - "B22DGI_CTTGTA_S3"
-  # - "B22DI_AGTCAA_S4"
-  # - "B33DGI_GTAGAG_S5"
-  # - "C22DMG_AGTTCC_S6"
-  # - "C33DI_GTCCGC_S7"
-  # - "D33DMG_GTGAAA_S8"
-  # - "DDDDD5_ACTGAT_S1"
-  # - "DDMDMG_GTTTCG_S2"
-  # - "DDMDMI_CGTACG_S3"
-  # - "DE33DMI_GTGGCC_S9"
-  # - "E22DMI_ATGTCA_S10"
-  # - "WTWT20_GGTAGC_S10"
-  # - "WWTWT5_GAGTGG_S11"
-  - "CPSWT"
-  - "CPSA3"
-  - "CPSUvrD"
-  - "CPSMA3"
+  # - "CPSWT"
+  # - "CPSA3"
+  # - "CPSUvrD"
+  # - "CPSMA3"
+  # - "c11x22coli1"
+  # - "c11x22coli2"
+  # - "c11x22coli3"
+  # - "c11x22coli4"
+  # - "c11x22coli5"
+  # - "c11x22coli6"
+  # - "c11x22coli7"
+  # - "c11x22coli8"
+  - "WT_G_1m_CPD_0"
+  - "WT_I_1m_CPD_0"
+  - "WT_G_5m_CPD_0"
+  - "WT_I_5m_CPD_0"
+  - "WT_G_20m_CPD_0"
+  - "WT_I_20m_CPD_0"
+  - "WT_G_60m_CPD_0"
+  - "WT_I_60m_CPD_0"
+  - "WT_I_5m_CPD_1"
+  - "lexA3_I_5m_CPD_1"
+  - "mfd_I_5m_CPD_1"
+  - "DKO_I_5m_CPD_1"
+  - "WT_I_10m_CPD_1"
+  - "lexA3_I_10m_CPD_1"
+  - "mfd_I_10m_CPD_1"
+  - "DKO_I_10m_CPD_1"
+  - "WT_G_1m_64_1"
+  - "WT_I_1m_64_1"
+  - "lexA3_G_1m_64_1"
+  - "lexA3_I_1m_64_1"
+  - "WT_G_5m_64_1"
+  - "WT_I_5m_64_1"
+  - "lexA3_G_5m_64_1"
+  - "lexA3_I_5m_64_1"
+  - "3x24A3splt"
+  - "3x24m60m"
+  - "3x24W20m64"
+  - "3x24WT-15s"
+  - "3x24WT20m"
+  - "3x24WT60m"
+  - "3x24WTpls15s"
+  - "3x24WTsplt"
+  - "3x3m10m"
+  - "3x3m5m"
+  - "3x3m60m8"
+  - "3x3m60m9"
+  - "3x3WT10m"
+  - "3x3WT1m"
+  - "3x3WT20m"
+  - "3x3WT60m"
+  - "5x8DI15s"
+  - "5x8DG15s"
+  - "5x8DI1m"
+  - "5x8DG1m"
+  - "5x8WI15s"
+  - "5x8WG15s"
+  - "5x8WI5m"
+  - "5x8WG5m"
+  - "5x8WI1m"
+  - "5x8WI20m"
+  - "5x8WI60F1"
+  - "5x8WI20"
+  - "5x8WI60E4"
+  - "5x8WG1"
+  - "5x8WG20"
+  - "5x8WI608"
+  - "5x8MI90G"
+  - "5x8MI90H"
+  - "5x8MI120I"
+  - "5x8MI120J"
+  - WT_G_1m_64_1TT
+  - WT_I_1m_64_1TT
+  - lexA3_G_1m_64_1TT
+  - lexA3_I_1m_64_1TT
+  - WT_G_5m_64_1TT
+  - WT_I_5m_64_1TT
+  - lexA3_G_5m_64_1TT
+  - lexA3_I_5m_64_1TT
+  - 3x24WT-15sTT
+  - 3x24WTpls15sTT
+  - 3x24W20m64TT
+  - 5x8DI15sTT
+  - 5x8DG15sTT
+  - 5x8DI1mTT
+  - 5x8DG1mTT
+  - 5x8WI15sTT
+  - 5x8WG15sTT
+  - 5x8WI5mTT
+  - 5x8WG5mTT
+  - 5x8WI1mTT
+  - 5x8WI20mTT
+  - 5x8WI60F1TT
+  - 5x8WI20TT
+  - 5x8WI60E4TT
+  - 5x8WG1TT
+  - 5x8WG20TT
+  - 5x8WI608TT
+  #mfd group
+  # - mfd_I_5m_CPD_1
+  # - mfd_I_10m_CPD_1
+  # - 3x3m5m
+  # - 3x3m10m
+  # - 3x3m60m8
+  # - 3x3m60m9
+  # - 3x24m60m
+  # - 5x8MI90G
+  # - 5x8MI90H
+  # - 5x8MI120I
+  # - 5x8MI120J
 
+# WT CPD IPTG group
+  # - WT_I_10m_CPD_1
+  # - 3x3WT10m
+  # - WT_I_1m_CPD_0
+  # - 3x3WT1m
+  # - WT_I_20m_CPD_0
+  # - 3x3WT20m
+  # - 3x24WT20m
+  # - WT_I_5m_CPD_0
+  # - WT_I_5m_CPD_1
+  # - WT_I_60m_CPD_0
+  # - 3x3WT60m
+  # - 3x24WT60m
+
+# WSI - WT 64PP IPTG group
+  # - WT_I_1m_64_1
+  # - WT_I_5m_64_1
+  # - 3x24WTpls15s
+  # - 3x24W20m64
+  # - 5x8WI15s
+  # - 5x8WI5m
+  # - 5x8WI1m
+  # - 5x8WI20m
+  # - 5x8WI60F1
+  # - 5x8WI20
+  # - 5x8WI60E4
+  # - 5x8WI608
+
+# SFTT - (6-4)PP TT all
+    # - WT_G_1m_64_1TT
+    # - WT_I_1m_64_1TT
+    # - lexA3_G_1m_64_1TT
+    # - lexA3_I_1m_64_1TT
+    # - WT_G_5m_64_1TT
+    # - WT_I_5m_64_1TT
+    # - lexA3_G_5m_64_1TT
+    # - lexA3_I_5m_64_1TT
+    # - 3x24WT-15sTT
+    # - 3x24WTpls15sTT
+    # - 3x24W20m64TT
+    # - 5x8DI15sTT
+    # - 5x8DG15sTT
+    # - 5x8DI1mTT
+    # - 5x8DG1mTT
+    # - 5x8WI15sTT
+    # - 5x8WG15sTT
+    # - 5x8WI5mTT
+    # - 5x8WG5mTT
+    # - 5x8WI1mTT
+    # - 5x8WI20mTT
+    # - 5x8WI60F1TT
+    # - 5x8WI20TT
+    # - 5x8WI60E4TT
+    # - 5x8WG1TT
+    # - 5x8WG20TT
+    # - 5x8WI608TT
 
 meta: 
-  CPSWT:
-    title: WT_R1
+  WT_G_1m_CPD_0:
+    title: WT_G_1m_CPD_r0
+    medium: "Glucose"
+    time: "1m"
     strain: WT
     product: CPD
+    damageSite: TT
+    replicate: 0
+  WT_I_1m_CPD_0:
+    title: WT_I_1m_CPD_r0
+    medium: "IPTG"
+    time: "1m"
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 0
+  WT_G_5m_CPD_0:
+    title: WT_G_5m_CPD_r0
+    medium: "Glucose"
+    time: "5m"
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 0
+  WT_I_5m_CPD_0:
+    title: WT_I_5m_CPD_r0
+    medium: "IPTG"
+    time: "5m"
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 0
+  WT_G_20m_CPD_0:
+    title: WT_G_20m_CPD_r0
+    medium: "Glucose"
+    time: "20m"
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 0
+  WT_I_20m_CPD_0:
+    title: WT_I_20m_CPD_r0
+    medium: "IPTG"
+    time: "20m"
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 0
+  WT_G_60m_CPD_0:
+    title: WT_G_60m_CPD_r0
+    medium: "Glucose"
+    time: "60m"
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 0
+  WT_I_60m_CPD_0:
+    title: WT_I_60m_CPD_r0
+    medium: "IPTG"
+    time: "60m"
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 0
+  WT_I_5m_CPD_1:
+    title: WT_I_5m_CPD_r1
+    medium: "IPTG"
+    time: "5m"
+    strain: WT
+    product: CPD
+    damageSite: TT
     replicate: 1
-  CPSA3:
-    title: A3_R1
+  lexA3_I_5m_CPD_1:
+    title: lexA3_I_5m_CPD_r1
+    medium: "IPTG"
+    time: "5m"
     strain: lexA3
     product: CPD
+    damageSite: TT
     replicate: 1
-  CPSMA3:
-    title: mfdUvrDA3_R1
-    strain: lexA3_mfd_uvrD
+  mfd_I_5m_CPD_1:
+    title: mfd_I_5m_CPD_r1
+    medium: "IPTG"
+    time: "5m"
+    strain: mfd
     product: CPD
+    damageSite: TT
     replicate: 1
-  CPSUvrD:
-    title: uvrD_R1
+  DKO_I_5m_CPD_1:
+    title: DKO_I_5m_CPD_r1
+    medium: "IPTG"
+    time: "5m"
+    strain: lexA3_mfd
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  WT_I_10m_CPD_1:
+    title: WT_I_10m_CPD_r1
+    medium: "IPTG"
+    time: "10m"
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  lexA3_I_10m_CPD_1:
+    title: lexA3_I_10m_CPD_r1
+    medium: "IPTG"
+    time: "10m"
+    strain: lexA3
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  mfd_I_10m_CPD_1:
+    title: mfd_I_10m_CPD_r1
+    medium: "IPTG"
+    time: "10m"
+    strain: mfd
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  DKO_I_10m_CPD_1:
+    title: DKO_I_10m_CPD_r1
+    medium: "IPTG"
+    time: "10m"
+    strain: lexA3_mfd
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  WT_G_1m_64_1:
+    title: WT_G_1m_64_r1
+    medium: "Glucose"
+    time: "1m"
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  WT_G_1m_64_1TT:
+    title: WT_G_1m_64_r1_TT
+    medium: "Glucose"
+    time: "1m"
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  WT_I_1m_64_1:
+    title: WT_I_1m_64_r1
+    medium: "IPTG"
+    time: "1m"
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  WT_I_1m_64_1TT:
+    title: WT_I_1m_64_r1_TT
+    medium: "IPTG"
+    time: "1m"
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  lexA3_G_1m_64_1:
+    title: lexA3_G_1m_64_r1
+    medium: "Glucose"
+    time: "1m"
+    strain: lexA3
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  lexA3_G_1m_64_1TT:
+    title: lexA3_G_1m_64_r1_TT
+    medium: "Glucose"
+    time: "1m"
+    strain: lexA3
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  lexA3_I_1m_64_1:
+    title: lexA3_I_1m_64_r1
+    medium: "IPTG"
+    time: "1m"
+    strain: lexA3
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  lexA3_I_1m_64_1TT:
+    title: lexA3_I_1m_64_r1_TT
+    medium: "IPTG"
+    time: "1m"
+    strain: lexA3
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  WT_G_5m_64_1:
+    title: WT_G_5m_64_r1
+    medium: "Glucose"
+    time: "5m"
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  WT_G_5m_64_1TT:
+    title: WT_G_5m_64_r1_TT
+    medium: "Glucose"
+    time: "5m"
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  WT_I_5m_64_1:
+    title: WT_I_5m_64_r1
+    medium: "IPTG"
+    time: "5m"
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  WT_I_5m_64_1TT:
+    title: WT_I_5m_64_r1_TT
+    medium: "IPTG"
+    time: "5m"
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  lexA3_G_5m_64_1:
+    title: lexA3_G_5m_64_r1
+    medium: "Glucose"
+    time: "5m"
+    strain: lexA3
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  lexA3_G_5m_64_1TT:
+    title: lexA3_G_5m_64_r1_TT
+    medium: "Glucose"
+    time: "5m"
+    strain: lexA3
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  lexA3_I_5m_64_1:
+    title: lexA3_I_5m_64_r1
+    medium: "IPTG"
+    time: "5m"
+    strain: lexA3
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  lexA3_I_5m_64_1TT:
+    title: lexA3_I_5m_64_r1_TT
+    medium: "IPTG"
+    time: "5m"
+    strain: lexA3
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+
+
+  3x3WT1m:
+    title: WT_I_1m_CPD_r1
+    medium: IPTG
+    time: 1m
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  3x3WT10m:
+    title: WT_I_10m_CPD_r2
+    medium: IPTG
+    time: 10m
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 2
+  3x3WT20m:
+    title: WT_I_20m_CPD_r1
+    medium: IPTG
+    time: 20m
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  3x3WT60m:
+    title: WT_I_60m_CPD_r1
+    medium: IPTG
+    time: 60m
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  3x3m5m:
+    title: mfd_I_5m_CPD_r2
+    medium: IPTG
+    time: 5m
+    strain: mfd
+    product: CPD
+    damageSite: TT
+    replicate: 2
+  3x3m10m:
+    title: mfd_I_10m_CPD_r2
+    medium: IPTG
+    time: 10m
+    strain: mfd
+    product: CPD
+    damageSite: TT
+    replicate: 2
+  3x3m60m8:
+    title: mfd_I_60m_CPD_r1
+    medium: IPTG
+    time: 60m
+    strain: mfd
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  3x3m60m9:
+    title: mfd_I_60m_CPD_r2
+    medium: IPTG
+    time: 60m
+    strain: mfd
+    product: CPD
+    damageSite: TT
+    replicate: 2
+  3x24WT60m:
+    title: WT_I_60m_CPD_r2
+    medium: IPTG
+    time: 60m
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 2
+  3x24WT20m:
+    title: WT_I_20m_CPD_r2
+    medium: IPTG
+    time: 20m
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 2
+  3x24m60m:
+    title: mfd_I_60m_CPD_r3
+    medium: IPTG
+    time: 60m
+    strain: mfd
+    product: CPD
+    damageSite: TT
+    replicate: 3
+  3x24WT-15s:
+    title: WT_G_15s_64_r1
+    medium: Glucose
+    time: 15s
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  3x24WT-15sTT:
+    title: WT_G_15s_64_r1_TT
+    medium: Glucose
+    time: 15s
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  3x24WTpls15s:
+    title: WT_I_15s_64_r1
+    medium: IPTG
+    time: 15s
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  3x24WTpls15sTT:
+    title: WT_I_15s_64_r1_TT
+    medium: IPTG
+    time: 15s
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  3x24WTsplt:
+    title: WT_I_splt_CPD_r1
+    medium: IPTG
+    time: split
+    strain: WT
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  3x24A3splt:
+    title: lexA_I_splt_CPD_r1
+    medium: IPTG
+    time: split
+    strain: lexA3
+    product: CPD
+    damageSite: TT
+    replicate: 1
+  3x24W20m64:
+    title: WT_I_20m_64_r1
+    medium: IPTG
+    time: 20m
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  3x24W20m64TT:
+    title: WT_I_20m_64_r1_TT
+    medium: IPTG
+    time: 20m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  5x8DI15s:
+    title: uvrD_I_15s_64_r1
+    medium: IPTG
+    time: 15s
     strain: uvrD
-    product: CPD
+    product: 64PP
+    damageSite: TC
     replicate: 1
+  5x8DI15sTT:
+    title: uvrD_I_15s_64_r1_TT
+    medium: IPTG
+    time: 15s
+    strain: uvrD
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  5x8DG15s:
+    title: uvrD_G_15s_64_r1
+    medium: Glucose
+    time: 15s
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  5x8DG15sTT:
+    title: uvrD_G_15s_64_r1_TT
+    medium: Glucose
+    time: 15s
+    strain: uvrD
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  5x8DI1m:
+    title: uvrD_I_1m_64_r1
+    medium: IPTG
+    time: 1m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  5x8DI1mTT:
+    title: uvrD_I_1m_64_r1_TT
+    medium: IPTG
+    time: 1m
+    strain: uvrD
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  5x8DG1m:
+    title: uvrD_G_1m_64_r1
+    medium: Glucose
+    time: 1m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  5x8DG1mTT:
+    title: uvrD_G_1m_64_r1_TT
+    medium: Glucose
+    time: 1m
+    strain: uvrD
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  5x8WI15s:
+    title: WT_I_15s_64_r2
+    medium: IPTG
+    time: 15s
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  5x8WI15sTT:
+    title: WT_I_15s_64_r2_TT
+    medium: IPTG
+    time: 15s
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 2
+  5x8WG15s:
+    title: WT_G_15s_64_r2
+    medium: Glucose
+    time: 15s
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  5x8WG15sTT:
+    title: WT_G_15s_64_r2_TT
+    medium: Glucose
+    time: 15s
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 2
+  5x8WI5m:
+    title: WT_I_5m_64_r2
+    medium: IPTG
+    time: 5m
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  5x8WI5mTT:
+    title: WT_I_5m_64_r2_TT
+    medium: IPTG
+    time: 5m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 2
+  5x8WG5m:
+    title: WT_G_5m_64_r2
+    medium: Glucose
+    time: 5m
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  5x8WG5mTT:
+    title: WT_G_5m_64_r2_TT
+    medium: Glucose
+    time: 5m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 2
+  5x8WI1m:
+    title: WT_I_1m_64_r2
+    medium: IPTG
+    time: 1m
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  5x8WI1mTT:
+    title: WT_I_1m_64_r2_TT
+    medium: IPTG
+    time: 1m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 2
+  5x8WI20m:
+    title: WT_I_20m_64_r2
+    medium: IPTG
+    time: 20m
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  5x8WI20mTT:
+    title: WT_I_20m_64_r2_TT
+    medium: IPTG
+    time: 20m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 2
+  5x8WI60F1:
+    title: WT_I_60m_64_r2
+    medium: IPTG
+    time: 60m
+    strain: WT
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  5x8WI60F1TT:
+    title: WT_I_60m_64_r2_TT
+    medium: IPTG
+    time: 60m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 2
+  5x8WI20:
+      title: WT_I_20m_64_r3
+      medium: IPTG
+      time: 20m
+      strain: WT
+      product: 64PP
+      damageSite: TC
+      replicate: 3
+  5x8WI20TT:
+    title: WT_I_20m_64_r3_TT
+    medium: IPTG
+    time: 20m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 3
+  5x8WI60E4:
+      title: WT_I_60m_64_r3
+      medium: IPTG
+      time: 60m
+      strain: WT
+      product: 64PP
+      damageSite: TC
+      replicate: 3
+  5x8WI60E4TT:
+    title: WT_I_60m_64_r3_TT
+    medium: IPTG
+    time: 60m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 3
+  5x8WG1:
+      title: WT_G_1m_64_r2
+      medium: Glucose
+      time: 1m
+      strain: WT
+      product: 64PP
+      damageSite: TC
+      replicate: 2
+  5x8WG1TT:
+    title: WT_G_1m_64_r2_TT
+    medium: Glucose
+    time: 1m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 2
+  5x8WG20:
+      title: WT_G_20m_64_r1
+      medium: Glucose
+      time: 20m
+      strain: WT
+      product: 64PP
+      damageSite: TC
+      replicate: 1
+  5x8WG20TT:
+    title: WT_G_20m_64_r1_TT
+    medium: Glucose
+    time: 20m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  5x8WI608:
+      title: WT_I_60m_64_r1
+      medium: IPTG
+      time: 60m
+      strain: WT
+      product: 64PP
+      damageSite: TC
+      replicate: 1
+  5x8WI608TT:
+    title: WT_I_60m_64_r1_TT
+    medium: IPTG
+    time: 60m
+    strain: WT
+    product: 64PP
+    damageSite: TT
+    replicate: 1
+  5x8MI90G:
+      title: mfd_I_90m_CPD_r1
+      medium: IPTG
+      time: 90m
+      strain: mfd
+      product: CPD
+      damageSite: TT
+      replicate: 1
+  5x8MI90H:
+      title: mfd_I_90m_CPD_r2
+      medium: IPTG
+      time: 90m
+      strain: mfd
+      product: CPD
+      damageSite: TT
+      replicate: 2
+  5x8MI120I:
+      title: mfd_I_120m_CPD_r1
+      medium: IPTG
+      time: 120m
+      strain: mfd
+      product: CPD
+      damageSite: TT
+      replicate: 1
+  5x8MI120J:
+      title: mfd_I_120m_CPD_r2
+      medium: IPTG
+      time: 120m
+      strain: mfd
+      product: CPD
+      damageSite: TT
+      replicate: 2
 
 
+readLength:
+  - "10"
+  - "11"
+  - "12"
+  - "13"
+
+strand:
+  - "plus"
+  - "minus"
+
+readLengthForNucleotide:
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
     
   # SRR13006715:
   #   title: 00WT_05m_R1 
   #   product: CPD
   #   strain: WT
-  #   time: 5min
+  #   time: 5m
   #   replicate: 1
   # SRR13006716:
   #   title: UvrD_05m_R1 
   #   product: CPD
   #   strain: UvrD
-  #   time: 5min
+  #   time: 5m
   #   replicate: 2
   # SRR12775234:
   #   title: 00WT_05m_R2
   #   product: CPD
   #   strain: WT
-  #   time: 5min
+  #   time: 5m
   #   replicate: 2
   # SRR12775235:
   #   title: UvrD_10m_R1 
   #   product: CPD
   #   strain: UvrD
-  #   time: 10min
+  #   time: 10m
+  #   replicate: 1
+
+# CPSWT:
+  #   title: WT_R1
+  #   strain: WT
+  #   product: CPD
+  #   damageSite: TT
+  #   replicate: 1
+  # CPSA3:
+  #   title: A3_R1
+  #   strain: lexA3
+  #   product: CPD
+  #   damageSite: TT
+  #   replicate: 1
+  # CPSMA3:
+  #   title: mfdUvrDA3_R1
+  #   strain: lexA3_mfd_uvrD
+  #   product: CPD
+  #   damageSite: TT
+  #   replicate: 1
+  # CPSUvrD:
+  #   title: uvrD_R1
+  #   strain: uvrD
+  #   product: CPD
+  #   damageSite: TT
   #   replicate: 1
 
 srr: 
@@ -75,14 +949,17 @@ srr:
   codes:
     - ""
 
+damageSites:
+  - 'TT'
+  - 'TC'
+
 # Genome parameters 
 
 genome_download: False
 
 bowtie2_build: True
 
-build: "nc0009133" 
-project: "ecoli"
+
 
 species: ""
 
