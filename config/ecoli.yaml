@@ -3,9 +3,29 @@ build: "nc0009133"
 # project: "ecoli_WIC"
 # project: "ecoli_WSI"
 # project: "ecoli_SFTT"
-project: "ecoli_all"
+project: "ecoli_64uvrd"
+# project: "ecoli_all"
 
-sample: 
+sample:
+  - uvrD0_GTGAATAT
+  # - uvrD2_ACAGGCGC
+  # - uvrD5_CATAGAGT
+  # - uvrD15_TGCGAGAC
+  # - uvrDM0_TCTCTACT
+  # - uvrDM2_CTCTCGTC
+  # - uvrDM5_CCAAGTCT
+  # - uvrDM15_TTGGACTC
+  # - uvrD0_GTGAATAT_rep2
+  # - uvrD2_ACAGGCGC_rep2
+  # - uvrD5_CATAGAGT_rep2
+  # - uvrD15_TGCGAGAC_rep2
+  # - uvrDM0_TCTCTACT_rep2
+  # - uvrDM2_CTCTCGTC_rep2
+  # - uvrDM5_ATGGCATG_rep2
+  # - uvrDM15_GCAATGCA_rep2
+  # - mfd1mA_CTTATCGG_rep2
+
+sample_ori:
   # - "CPSWT"
   # - "CPSA3"
   # - "CPSUvrD"
@@ -874,6 +894,146 @@ meta:
       product: CPD
       damageSite: TT
       replicate: 2
+  uvrD0_GTGAATAT:
+    title: uvrD_PI_0m_r1
+    medium: IPTG
+    time: 0m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  uvrD2_ACAGGCGC:
+    title: uvrD_PI_2m_r1
+    medium: IPTG
+    time: 2m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  uvrD5_CATAGAGT:
+    title: uvrD_PI_5m_r1
+    medium: IPTG
+    time: 5m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  uvrD15_TGCGAGAC:
+    title: uvrD_PI_15m_r1
+    medium: IPTG
+    time: 15m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  uvrDM0_TCTCTACT:
+    title: uvrDM_PI_0m_r1
+    medium: IPTG
+    time: 0m
+    strain: uvrD_mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  uvrDM2_CTCTCGTC:
+    title: uvrDM_PI_2m_r1
+    medium: IPTG
+    time: 2m
+    strain: uvrD_mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  uvrDM5_CCAAGTCT:
+    title: uvrDM_PI_5m_r1
+    medium: IPTG
+    time: 5m
+    strain: uvrD_mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+  uvrDM15_TTGGACTC:
+    title: uvrDM_PI_15m_r1
+    medium: IPTG
+    time: 15m
+    strain: uvrD_mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 1
+
+
+
+  uvrD0_GTGAATAT_rep2:
+    title: uvrD_PI_0m_r2
+    medium: IPTG
+    time: 0m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  uvrD2_ACAGGCGC_rep2:
+    title: uvrD_PI_2m_r2
+    medium: IPTG
+    time: 2m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  uvrD5_CATAGAGT_rep2:
+    title: uvrD_PI_5m_r2
+    medium: IPTG
+    time: 5m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  uvrD15_TGCGAGAC_rep2:
+    title: uvrD_PI_15m_r2
+    medium: IPTG
+    time: 15m
+    strain: uvrD
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  uvrDM0_TCTCTACT_rep2:
+    title: uvrDM_PI_0m_r2
+    medium: IPTG
+    time: 0m
+    strain: uvrD_mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  uvrDM2_CTCTCGTC_rep2:
+    title: uvrDM_PI_2m_r2
+    medium: IPTG
+    time: 2m
+    strain: uvrD_mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  uvrDM5_ATGGCATG_rep2:
+    title: uvrDM_PI_5m_r2
+    medium: IPTG
+    time: 5m
+    strain: uvrD_mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+  uvrDM15_GCAATGCA_rep2:
+    title: uvrDM_PI_15m_r2
+    medium: IPTG
+    time: 15m
+    strain: uvrD_mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 2
+
+  mfd1mA_CTTATCGG_rep2:
+    title: mfd_PI_1m_r2
+    medium: IPTG
+    time: 1m
+    strain: mfd
+    product: 64PP
+    damageSite: TC
+    replicate: 2
 
 
 readLength:

@@ -1,12 +1,14 @@
 name: plot_nuc
 channels:
+  - bioconda
+  - conda-forge
   - defaults
 dependencies:
-  - conda-forge::r-base ==3.5.1
-  - conda-forge::r-argparser ==0.4
-  - conda-forge::r-ggplot2 ==3.0.0
-  - conda-forge::r-dplyr ==0.8.0.1
-  - conda-forge::r-tidyr ==0.8.2
-  - conda-forge::r-futile.logger ==1.4.3
+  - r-base==3.5.1
+  - r-argparser==0.4
+  - r-ggplot2==3.0.0
+  - r-dplyr==0.8.0.1
+  - r-tidyr==0.8.2
+  - r-futile.logger==1.4.3
   - python=3.8
   
