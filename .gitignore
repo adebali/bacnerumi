@@ -1,4 +1,5 @@
 results/*
+!results/readme.md
 results_0/*
 results_1/*
 resources/samples/*
