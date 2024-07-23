@@ -462,8 +462,7 @@ include: "prepareSingletons.smk"
 
 include: "faidx.smk"
 include: "genome_idx2ron.smk"
-# include: "fastq-sort.smk"
-include: "fastq-sort_custom.smk"
+include: "fastq-sort.smk"
 include: "removeDuplicatesAtFastq.smk"
 include: "adaptor_handling.smk"
 

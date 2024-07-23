@@ -5,11 +5,14 @@ sample:
 
 meta: 
   SRR1173967:
-    title: LB04_1
     replicate: 1
+    strain: WT
+    title: LB04_1
+    treatment: LB
   SRR1173968:
-    title: LB04_2
     replicate: 2
- 
+    strain: WT
+    title: LB04_2
+    treatment: LB
 build: "nc0009133" 
-project: "ecoli"
+project: "ecoli_WT_SRA"

@@ -6,8 +6,8 @@ rule removeDuplicatesAtFastq:
         "results/{sample}/{sample}_removedDup.fastq"
     log:
         "logs/rule/analysis/{sample}/{sample}_removedDup.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}removedDup.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}removedDup.benchmark.txt",
     resources:
         memory="32GB",
         cpu=1

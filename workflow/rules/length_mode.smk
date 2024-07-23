@@ -7,8 +7,8 @@ rule length_mode:
         temp("results/{sample}/{sample}_lengthMode.bed"),
     log:
         "logs/rule/analysis/{sample}/{sample}_length_mode.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_length_mode.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_length_mode.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

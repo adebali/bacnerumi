@@ -1,5 +1,13 @@
 results/*
+results_0/*
+results_1/*
 resources/samples/*
+resources/RNA-seq/*
+tophat_out
+trimmed
+results_1
+star
+resources/input/*
 !resources/samples/readme.md
 resources/input/*
 !resources/input/readme.md

@@ -12,8 +12,8 @@ rule bam_corr_graphs:
                 category="Correlation"),
     log:
         "logs/rule/figs/bam_corr_graphs_{duplicate}.log",
-    benchmark:
-        "logs/rule/figs/bam_corr_graphs.benchmark_{duplicate}.txt",
+    # benchmark:
+    #     "logs/rule/figs/bam_corr_graphs.benchmark_{duplicate}.txt",
     resources:
         memory="16GB",
         cpu=1

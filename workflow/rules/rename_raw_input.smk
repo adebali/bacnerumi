@@ -8,8 +8,8 @@ rule rename_raw_input:
         r2="resources/input/{samples}_2.fastq.gz",
     log:
         "logs/rule/analysis/{sample}/{sample}_rename_raw_input.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_rename_raw_input.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_rename_raw_input.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

@@ -10,8 +10,8 @@ rule genome_chr_download:
         chromosome="{chr}",
     log:
         "logs/rule/analysis/{build}/log/download_chr{chr}.log",
-    benchmark:
-        "logs/rule/analysis/{build}/log/download_chr{chr}.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{build}/log/download_chr{chr}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

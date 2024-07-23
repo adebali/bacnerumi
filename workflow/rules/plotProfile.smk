@@ -14,8 +14,8 @@ rule plot_profile:
         data="results/{sample}/{sample}_sorted_located_matrix_regions.tab",  # required
     log:
         "logs/rule/analysis/{sample}/{sample}_sorted_located_matrix_plot.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_sorted_located_matrix_plot.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_sorted_located_matrix_plot.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1,
@@ -33,8 +33,8 @@ rule plot_heatmap:
         category="heatmap"),  # required
     log:
         "logs/rule/analysis/{sample}/{sample}_sorted_located_matrix_heatmap.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_sorted_located_matrix_heatmap.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_sorted_located_matrix_heatmap.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1,
@@ -60,8 +60,8 @@ rule plot_profile_sim:
         data="results/{samples}/simulation/{samples}_sorted_located_matrix_regions.tab",  # required
     log:
         "logs/rule/analysis/{samples}/simulation/{samples}_sorted_located_matrix_plot.log",
-    benchmark:
-        "logs/rule/analysis/{samples}/simulation/{samples}_sorted_located_matrix_plot.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{samples}/simulation/{samples}_sorted_located_matrix_plot.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1,

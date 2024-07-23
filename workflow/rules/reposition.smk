@@ -9,8 +9,8 @@ rule reposition:
         minus=temp("results/{sample}/{sample}_sorted_minus_10.bed"), 
     log:
         "logs/rule/analysis/{sample}/{sample}_reposition.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_reposition.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_reposition.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

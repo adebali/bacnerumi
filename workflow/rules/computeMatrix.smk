@@ -13,8 +13,8 @@ rule compute_matrix_for_operon_start:
         matrix_bed="results/{sample}/{sample}_sorted_located_matrix.bed",
     log:
         "logs/rule/analysis/{sample}/{sample}_locateDamage_matrix.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_locateDamage_matrix.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_locateDamage_matrix.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1,
@@ -41,8 +41,8 @@ rule compute_matrix_for_operon_start_sim:
         matrix_bed="results/{samples}/simulation/{samples}_sorted_located_matrix.bed",
     log:
         "logs/rule/analysis/{samples}/simulation/{samples}_locateDamage_matrix.log",
-    benchmark:
-        "logs/rule/analysis/{samples}/simulation/{samples}_locateDamage_matrix.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{samples}/simulation/{samples}_locateDamage_matrix.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1,

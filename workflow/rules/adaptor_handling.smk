@@ -10,8 +10,8 @@ rule cutadapt_se:
         extra='--discard-untrimmed'  
     log:
         "logs/rule/analysis/{sample}/{sample}_cut.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_cut.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_cut.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],

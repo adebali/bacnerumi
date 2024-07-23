@@ -8,8 +8,8 @@ rule genome_variation:
         type="all", # one of "all", "somatic", "structural_variation"
     log:
         "logs/rule/analysis/{build}/log/genome_variation.log",
-    benchmark:
-        "logs/rule/analysis/{build}/log/genome_variation.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{build}/log/genome_variation.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

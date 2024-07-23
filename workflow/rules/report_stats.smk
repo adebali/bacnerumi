@@ -9,8 +9,8 @@ rule report_stats:
     output: report("results/{sample}/{sample}_report.txt", category="report"), 
     log:
         "logs/rule/analysis/{sample}/{sample}_reportStats.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_reportStats.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_reportStats.benchmark.txt",
     resources:
         memory="4GB",
         cpu=1

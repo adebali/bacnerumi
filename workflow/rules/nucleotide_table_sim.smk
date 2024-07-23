@@ -9,8 +9,8 @@ rule nucleotide_table_xr_sim:
         filt=temp("results/{samples}/simulation/{samples}_filt.fa"),
     log:
         "logs/rule/analysis/{samples}/simulation/{samples}_nucleotide_table.log",
-    benchmark:
-        "logs/rule/analysis/{samples}/simulation/{samples}_nucleotide_table.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{samples}/simulation/{samples}_nucleotide_table.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

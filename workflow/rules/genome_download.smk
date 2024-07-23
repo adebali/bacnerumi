@@ -9,8 +9,8 @@ rule genome_download:
         release=config["release"],
     log:
         "logs/rule/analysis/{build}/log/download.log",
-    benchmark:
-        "logs/rule/analysis/{build}/log/download.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{build}/log/download.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

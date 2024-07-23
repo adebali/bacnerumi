@@ -7,8 +7,8 @@ rule samtools_index:
         report(f"resources/ref_genomes/{build_}/genome.fa.fai",category="genome"),
     log:
         f"logs/rule/{build_}/faidx.log",
-    benchmark:
-        f"logs/rule/{build_}/faidx.benchmark.txt",
+    # benchmark:
+    #     f"logs/rule/{build_}/faidx.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

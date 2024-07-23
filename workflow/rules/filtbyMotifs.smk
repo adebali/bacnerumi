@@ -8,8 +8,8 @@ rule filtbyMotifs:
         lambda w: getMotif(w.samples, config["meta"][w.samples]["product"]),
     log:
         "logs/rule/analysis/{sample}/{sample}_filtbyMotifs_{strand}.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_filtbyMotifs_{strand}.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_filtbyMotifs_{strand}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

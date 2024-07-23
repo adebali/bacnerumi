@@ -9,7 +9,7 @@ rule genome_build:
     output:
         index_1 = f"resources/ref_genomes/{build}/Bowtie2/genome.1.bt2"
     log: f"logs/rule/analysis/{build}/log/bowtie2_build.log"
-    benchmark: f"logs/rule/analysis/{build}/log/bowtie2_build.benchmark.txt"
+    # benchmark: f"logs/rule/analysis/{build}/log/bowtie2_build.benchmark.txt"
     conda:
         "../envs/align.yaml"
     resources:

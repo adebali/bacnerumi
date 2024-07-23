@@ -8,8 +8,8 @@ rule locateDamage:
         minus="results/{sample}/{sample}_fslm.bed",
     log: 
         "results/{sample}/{sample}_fsl.log",
-    benchmark: 
-        "results/{sample}/{sample}_fsl.benchmark.txt",
+    # benchmark: 
+        # "results/{sample}/{sample}_fsl.benchmark.txt",
     resources:
         memory="2GB",
         cpu=1,
@@ -34,5 +34,5 @@ use rule locateDamage as locateDamage_sim with:
         minus="results/{samples}/simulation/{samples}_fslm.bed",
     log: 
         "results/{samples}/simulation/{samples}_fsl.log",
-    benchmark: 
-        "results/{samples}/simulation/{samples}_fsl.benchmark.txt",
+    # benchmark: 
+        # "results/{samples}/simulation/{samples}_fsl.benchmark.txt",

@@ -9,8 +9,8 @@ rule fastqc_se:
     params: ""
     log:
         "logs/rule/analysis/{sample}/{sample}_fastqc.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_fastqc.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_fastqc.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],

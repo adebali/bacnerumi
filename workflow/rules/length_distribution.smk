@@ -36,8 +36,8 @@ rule fastq2length:
         fields = lambda w: getSampleFields(config["meta"][w.sample])
     log:
         "logs/rule/analysis/{sample}/{sample}_length.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_length.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_length.benchmark.txt",
     resources:
         memory="4GB",
         cpu=1

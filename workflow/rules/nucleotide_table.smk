@@ -4,7 +4,7 @@ rule fastq2fa:
     input: rules.cutadapt_se.output.fastq
     output: "results/{sample}/{sample}_cut.fa"
     log: "logs/rule/analysis/{sample}/{sample}_fastq2fa.log",
-    benchmark: "logs/rule/analysis/{sample}/{sample}_fastq2fa.benchmark.txt",
+    # benchmark: "logs/rule/analysis/{sample}/{sample}_fastq2fa.benchmark.txt",
     resources:
         memory="4GB",
         cpu=1
@@ -25,7 +25,7 @@ rule fa2filteredFa:
         length_dist=rules.fastq2length.output.nozero
     output: "results/{sample}/{sample}_cutN.fa"
     log: "logs/rule/analysis/{sample}/{sample}fa2filteredFa.log",
-    benchmark: "logs/rule/analysis/{sample}/{sample}fa2filteredFa.benchmark.txt",
+    # benchmark: "logs/rule/analysis/{sample}/{sample}fa2filteredFa.benchmark.txt",
     resources:
         memory="4GB",
         cpu=1
@@ -51,8 +51,8 @@ rule nucleotide_table:
         dinuc=temp("results/{sample}/{sample}_dinuc.txt"),
     log:
         "logs/rule/analysis/{sample}/{sample}_nucleotide.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_nucleotide.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_nucleotide.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -96,8 +96,8 @@ rule nucleotide_table_forEachLength:
         fields = lambda w: getSampleFields(config["meta"][w.sample])
     log:
         "logs/rule/analysis/{sample}/{sample}_nucleotide_{readLength}.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_nucleotide_{readLength}.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_nucleotide_{readLength}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -167,8 +167,8 @@ rule plot_nuc:
         name=lambda w: returnItself(config["meta"][w.sample]["title"]) + "",
     log:
         "logs/rule/figs/{sample}/{sample}_plot_nuc.log",
-    benchmark:
-        "logs/rule/figs/{sample}/{sample}_plot_nuc.benchmark.txt",
+    # benchmark:
+        # "logs/rule/figs/{sample}/{sample}_plot_nuc.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -208,8 +208,8 @@ rule plot_nuc_sim:
         name=lambda w: returnItself(config["meta"][w.samples]["title"]) + "_simulation",
     log:
         "logs/rule/figs/{samples}/simulation/{samples}_plot_nuc.log",
-    benchmark:
-        "logs/rule/figs/{samples}/simulation/{samples}_plot_nuc.benchmark.txt",
+    # benchmark:
+        # "logs/rule/figs/{samples}/simulation/{samples}_plot_nuc.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

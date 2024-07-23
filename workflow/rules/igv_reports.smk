@@ -10,8 +10,8 @@ rule igv_report:
         extra="",  
     log:
         "logs/rule/analysis/{sample}/{sample}_igv_report_chr{chr}.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_igv_report_chr{chr}.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_igv_report_chr{chr}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

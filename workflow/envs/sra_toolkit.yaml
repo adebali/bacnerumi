@@ -1,0 +1,8 @@
+name: sra_toolkit
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - sra-tools==3.1.1
+  - hdf5==1.10.5

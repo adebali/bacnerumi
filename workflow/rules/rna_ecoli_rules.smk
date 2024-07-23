@@ -278,8 +278,8 @@ rule genomecov:
         bwtitle=lambda w: f'results/{project_}/bigwig/' + getTitle(w.sample) + f'_{w.strand}.bw',
     log:
         "logs/rule/analysis/{sample}_{strand}_genomeCov.log",
-    benchmark:
-        "logs/rule/analysis/{sample}_{strand}_genomeCov.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}_{strand}_genomeCov.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -369,7 +369,7 @@ rule mergeTranscriptCounts:
     output:
         out=f"results/{project_}/transcriptCounts.tsv",
     log: f"logs/rule/analysis/{project_}/transcriptCounts.log",
-    benchmark: f"logs/rule/analysis/{project_}/transcriptCounts.benchmark.txt",
+    # benchmark: f"logs/rule/analysis/{project_}/transcriptCounts.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

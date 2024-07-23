@@ -7,8 +7,8 @@ rule prepareSingletons:
         bedsingletons=report("resources/ref_genomes/{build}/singletons_{damageSite}.bed", category="genome"),
     log:
         "logs/rule/analysis/{build}/log/prepareSingletons_{damageSite}.log",
-    benchmark:
-        "logs/rule/analysis/{build}/log/prepareSingletons_{damageSite}.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{build}/log/prepareSingletons_{damageSite}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

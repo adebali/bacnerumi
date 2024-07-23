@@ -9,5 +9,5 @@ use rule bam2bed_se as bam2bed_dedup with:
         idx="results/{sample}/{sample}_dedup_sortedbyCoordinates.bam.bai",
     log:
         "logs/rule/analysis/{sample}/{sample}_dedup_bam2bed.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_dedup_bam2bed.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_dedup_bam2bed.benchmark.txt",

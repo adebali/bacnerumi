@@ -7,8 +7,8 @@ rule sra_se:
         name="{samples}",
     log:
         "logs/rule/analysis/{sample}/{sample}_se_sra.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_se_sra.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_se_sra.benchmark.txt",
     resources:
         memory="16GB",
         cpu=6
@@ -59,8 +59,8 @@ rule sra_pe:
         name="{samples}",
     log:
         "logs/rule/analysis/{sample}/{sample}_pe_sra.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_pe_sra.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_pe_sra.benchmark.txt",
     resources:
         memory="16GB",
         cpu=6

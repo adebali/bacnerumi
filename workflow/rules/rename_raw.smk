@@ -7,8 +7,8 @@ rule rename_raw:
         r2="resources/samples/{samples}_2.fastq.gz",
     log:
         "logs/rule/analysis/{sample}/{sample}_rename_raw.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_rename_raw.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/{sample}_rename_raw.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

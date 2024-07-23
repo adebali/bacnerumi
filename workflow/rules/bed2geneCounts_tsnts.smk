@@ -79,8 +79,8 @@ rule bed2geneCounts_tsnts_mappable_TT:
         mergedTSNTS=f"results/{project_}/mappable_TT_TSNTS.tsv",
     log:
         f"logs/rule/analysis/{project_}/mappable_TT_bed2geneTSNTScounts_random.log",
-    benchmark:
-        f"logs/rule/analysis/{project_}/mappable_TT_bed2geneTSNTScounts_random.benchmark.txt",
+    # benchmark:
+    #     f"logs/rule/analysis/{project_}/mappable_TT_bed2geneTSNTScounts_random.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],
@@ -128,8 +128,8 @@ use rule bed2geneCounts_tsnts_mappable_TT as bed2geneCounts_tsnts_mappable_TC wi
         mergedTSNTS=f"results/{project_}/mappable_TC_TSNTS.tsv",
     log:
         f"logs/rule/analysis/{project_}/mappable_TC_bed2geneTSNTScounts_random.log",
-    benchmark:
-        f"logs/rule/analysis/{project_}/mappable_TC_bed2geneTSNTScounts_random.benchmark.txt"
+    # benchmark:
+    #     f"logs/rule/analysis/{project_}/mappable_TC_bed2geneTSNTScounts_random.benchmark.txt"
 
 
 use rule bed2geneCounts_tsnts_mappable_TT as bed2geneCounts_tsnts_mappable_TTTC with:
@@ -142,8 +142,8 @@ use rule bed2geneCounts_tsnts_mappable_TT as bed2geneCounts_tsnts_mappable_TTTC 
         mergedTSNTS=f"results/{project_}/mappable_TTTC_TSNTS.tsv",
     log:
         f"logs/rule/analysis/{project_}/mappable_TTTC_bed2geneTSNTScounts_random.log",
-    benchmark:
-        f"logs/rule/analysis/{project_}/mappable_TTTC_bed2geneTSNTScounts_random.benchmark.txt",
+    # benchmark:
+    #     f"logs/rule/analysis/{project_}/mappable_TTTC_bed2geneTSNTScounts_random.benchmark.txt",
 
 
 rule mergeTSNTScounts:
@@ -153,7 +153,7 @@ rule mergeTSNTScounts:
     output:
         out=f"results/{project_}/readCountsTSNTS.tsv",
     log: f"logs/rule/analysis/{project_}/readCountsTSNTS.log",
-    benchmark: f"logs/rule/analysis/{project_}/readCountsTSNTS.benchmark.txt",
+    # benchmark: f"logs/rule/analysis/{project_}/readCountsTSNTS.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -172,7 +172,7 @@ rule mergeTSNTScounts_random:
     output:
         out=f"results/{project_}/random/readCountsTSNTS.tsv",
     log: f"logs/rule/analysis/{project_}/random/readCountsTSNTS.log",
-    benchmark: f"logs/rule/analysis/{project_}/random/readCountsTSNTS.benchmark.txt",
+    # benchmark: f"logs/rule/analysis/{project_}/random/readCountsTSNTS.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -194,8 +194,8 @@ use rule bed2geneCounts_tsnts as bed2geneCounts_tsnts_sim with:
         mergedTSNTS="results/{sample}/simulation/{sample}_TSNTS.tsv",
     log:
         "logs/rule/analysis/{sample}/simulation/{sample}_bed2geneCounts_tsnts.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/simulation/{sample}_bed2geneCounts_tsnts.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{sample}/simulation/{sample}_bed2geneCounts_tsnts.benchmark.txt",
 
 
 use rule mergeTSNTScounts as mergeTSNTScounts_sim with:
@@ -206,5 +206,5 @@ use rule mergeTSNTScounts as mergeTSNTScounts_sim with:
         out="results/simulation/readCountsTSNTS.tsv",
     log:
         "logs/rule/analysis/simulation/readCountsTSNTS.log",
-    benchmark:
-        "logs/rule/analysis/simulation/readCountsTSNTS.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/simulation/readCountsTSNTS.benchmark.txt",

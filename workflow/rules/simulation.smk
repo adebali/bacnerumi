@@ -15,8 +15,8 @@ rule simulation:
         boquila_sens=config["boquila"]["sens"],
     log:
         "logs/rule/analysis/{samples}/simulation/{samples}.log",
-    benchmark:
-        "logs/rule/analysis/{samples}/simulation/{samples}.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{samples}/simulation/{samples}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

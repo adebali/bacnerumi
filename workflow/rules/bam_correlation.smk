@@ -7,8 +7,8 @@ rule bam_correlation:
         raw_out="results/readCounts_{duplicate}.tab",
     log:
         "logs/rule/analysis/bam_correlation_{duplicate}.log",
-    benchmark:
-        "logs/rule/analysis/bam_correlation_{duplicate}.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/bam_correlation_{duplicate}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

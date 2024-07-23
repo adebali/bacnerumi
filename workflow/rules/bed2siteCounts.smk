@@ -9,8 +9,8 @@ rule bed2siteCounts:
     output: "results/{sample}/{sample}_siteCounts.tsv"
     log:
         "logs/rule/analysis/{sample}/{sample}bed2siteCounts.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}bed2siteCounts.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}bed2siteCounts.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],
@@ -41,7 +41,7 @@ rule mergeSiteCounts:
     output:
         out=f"results/{project_}/siteCounts.tsv",
     log: f"logs/rule/analysis/{project_}/siteCounts.log",
-    benchmark: f"logs/rule/analysis/{project_}/siteCounts.benchmark.txt",
+    # benchmark: f"logs/rule/analysis/{project_}/siteCounts.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

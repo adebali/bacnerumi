@@ -9,8 +9,8 @@ rule bed2shiftedBed:
         bed="results/{sample}/{sample}_plus_shifted.bed",
     log:
         "logs/rule/analysis/{sample}/{sample}_bed2shiftedBed.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bed2shiftedBed.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bed2shiftedBed.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],
@@ -33,8 +33,8 @@ rule bed2shiftedBed_minus:
         bed="results/{sample}/{sample}_minus_shifted.bed",
     log:
         "logs/rule/analysis/{sample}/{sample}_bed2shiftedBedM.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bed2shiftedBedM.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bed2shiftedBedM.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],
@@ -60,8 +60,8 @@ rule uniqueReads:
         both="results/{sample}/{sample}_shifted.bed"
     log:
         "logs/rule/analysis/{sample}/{sample}_uniqueReads.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_uniqueReads.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_uniqueReads.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],
@@ -84,8 +84,8 @@ rule mergeAndUnifyUniqueReads:
         f"results/{project_}/unified.bed",
     log:
         "logs/rule/analysis/mergeAndUnifyUniqueReads.log",
-    benchmark:
-        "logs/rule/analysis/mergeAndUnifyUniqueReads.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/mergeAndUnifyUniqueReads.benchmark.txt",
     resources:
         memory=config["resources"]["memory"],
         cpu=config["resources"]["cpu"],

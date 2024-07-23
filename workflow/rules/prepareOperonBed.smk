@@ -8,8 +8,8 @@ rule prepareOperon:
         chromosome=chromosome(),
     log:
         "logs/rule/analysis/{build}/operonsBed.log",
-    benchmark:
-        "logs/rule/analysis/{build}/log/operonBed.benchmark.txt",
+    # benchmark:
+        # "logs/rule/analysis/{build}/log/operonBed.benchmark.txt",
     resources:
         memory="2GB",
         cpu=1

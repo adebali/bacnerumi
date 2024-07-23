@@ -1,3 +1,4 @@
+name: fastq-tools
 channels:
   - bioconda
 dependencies:

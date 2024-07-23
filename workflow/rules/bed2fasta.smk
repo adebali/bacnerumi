@@ -8,8 +8,8 @@ rule bed2fasta:
         temp("results/{sample}/{sample}_lengthMode.fa"),
     log:
         "logs/rule/analysis/{sample}/{sample}_bed2fasta.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bed2fasta.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bed2fasta.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -36,8 +36,8 @@ rule bed2fasta_input:
         "results/input/{sample}/{sample}.fasta",
     log:
         "logs/rule/analysis/{sample}/{sample}_bed2fasta_input.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bed2fasta_input.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bed2fasta_input.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

@@ -3,29 +3,34 @@ build: "nc0009133"
 # project: "ecoli_WIC"
 # project: "ecoli_WSI"
 # project: "ecoli_SFTT"
-project: "ecoli_64uvrd"
-# project: "ecoli_all"
+# project: "ecoli_64uvrd"
+project: "ecoli_all"
+
+sample_uvrd:
+  - uvrD0_GTGAATAT
+  - uvrD2_ACAGGCGC
+  - uvrD5_CATAGAGT
+  - uvrD15_TGCGAGAC
+  - uvrDM0_TCTCTACT
+  - uvrDM2_CTCTCGTC
+  - uvrDM5_CCAAGTCT
+  - uvrDM15_TTGGACTC
+  - uvrD0_GTGAATAT_rep2
+  - uvrD2_ACAGGCGC_rep2
+  - uvrD5_CATAGAGT_rep2
+  - uvrD15_TGCGAGAC_rep2
+  - uvrDM0_TCTCTACT_rep2
+  - uvrDM2_CTCTCGTC_rep2
+  - uvrDM5_ATGGCATG_rep2
+  - uvrDM15_GCAATGCA_rep2
+  - mfd1mA_CTTATCGG_rep2
+
+sample_:
+  - mfd1mA_CTTATCGG_rep2
+  - uvrDM15_GCAATGCA_rep2
+
 
 sample:
-  - uvrD0_GTGAATAT
-  # - uvrD2_ACAGGCGC
-  # - uvrD5_CATAGAGT
-  # - uvrD15_TGCGAGAC
-  # - uvrDM0_TCTCTACT
-  # - uvrDM2_CTCTCGTC
-  # - uvrDM5_CCAAGTCT
-  # - uvrDM15_TTGGACTC
-  # - uvrD0_GTGAATAT_rep2
-  # - uvrD2_ACAGGCGC_rep2
-  # - uvrD5_CATAGAGT_rep2
-  # - uvrD15_TGCGAGAC_rep2
-  # - uvrDM0_TCTCTACT_rep2
-  # - uvrDM2_CTCTCGTC_rep2
-  # - uvrDM5_ATGGCATG_rep2
-  # - uvrDM15_GCAATGCA_rep2
-  # - mfd1mA_CTTATCGG_rep2
-
-sample_ori:
   # - "CPSWT"
   # - "CPSA3"
   # - "CPSUvrD"
@@ -49,27 +54,27 @@ sample_ori:
   - "WT_I_5m_CPD_1"
   - "lexA3_I_5m_CPD_1"
   - "mfd_I_5m_CPD_1"
-  - "DKO_I_5m_CPD_1"
+  # - "DKO_I_5m_CPD_1"
   - "WT_I_10m_CPD_1"
   - "lexA3_I_10m_CPD_1"
   - "mfd_I_10m_CPD_1"
-  - "DKO_I_10m_CPD_1"
+  # - "DKO_I_10m_CPD_1"
   - "WT_G_1m_64_1"
   - "WT_I_1m_64_1"
-  - "lexA3_G_1m_64_1"
-  - "lexA3_I_1m_64_1"
+  # - "lexA3_G_1m_64_1"
+  # - "lexA3_I_1m_64_1"
   - "WT_G_5m_64_1"
   - "WT_I_5m_64_1"
-  - "lexA3_G_5m_64_1"
-  - "lexA3_I_5m_64_1"
-  - "3x24A3splt"
+  # - "lexA3_G_5m_64_1"
+  # - "lexA3_I_5m_64_1"
+  # - "3x24A3splt"
   - "3x24m60m"
   - "3x24W20m64"
   - "3x24WT-15s"
   - "3x24WT20m"
   - "3x24WT60m"
   - "3x24WTpls15s"
-  - "3x24WTsplt"
+  # - "3x24WTsplt"
   - "3x3m10m"
   - "3x3m5m"
   - "3x3m60m8"
@@ -100,12 +105,12 @@ sample_ori:
   - "5x8MI120J"
   - WT_G_1m_64_1TT
   - WT_I_1m_64_1TT
-  - lexA3_G_1m_64_1TT
-  - lexA3_I_1m_64_1TT
+  # - lexA3_G_1m_64_1TT
+  # - lexA3_I_1m_64_1TT
   - WT_G_5m_64_1TT
   - WT_I_5m_64_1TT
-  - lexA3_G_5m_64_1TT
-  - lexA3_I_5m_64_1TT
+  # - lexA3_G_5m_64_1TT
+  # - lexA3_I_5m_64_1TT
   - 3x24WT-15sTT
   - 3x24WTpls15sTT
   - 3x24W20m64TT
@@ -125,6 +130,43 @@ sample_ori:
   - 5x8WG1TT
   - 5x8WG20TT
   - 5x8WI608TT
+  # - uvrD0_GTGAATAT
+  # - uvrD2_ACAGGCGC
+  # - uvrD5_CATAGAGT
+  # - uvrD15_TGCGAGAC
+  # - uvrDM0_TCTCTACT
+  # - uvrDM2_CTCTCGTC
+  # - uvrDM5_CCAAGTCT
+  # - uvrDM15_TTGGACTC
+  # - uvrD0_GTGAATAT_rep2
+  # - uvrD2_ACAGGCGC_rep2
+  # - uvrD5_CATAGAGT_rep2
+  # - uvrD15_TGCGAGAC_rep2
+  # - uvrDM0_TCTCTACT_rep2
+  # - uvrDM2_CTCTCGTC_rep2
+  # - uvrDM5_ATGGCATG_rep2
+  # - uvrDM15_GCAATGCA_rep2
+  - mfd1mA_CTTATCGG_rep2
+
+
+ # uvrd group:
+  # - uvrD0_GTGAATAT
+  # - uvrD2_ACAGGCGC
+  # - uvrD5_CATAGAGT
+  # - uvrD15_TGCGAGAC
+  # - uvrDM0_TCTCTACT
+  # - uvrDM2_CTCTCGTC
+  # - uvrDM5_CCAAGTCT
+  # - uvrDM15_TTGGACTC
+  # - uvrD0_GTGAATAT_rep2
+  # - uvrD2_ACAGGCGC_rep2
+  # - uvrD5_CATAGAGT_rep2
+  # - uvrD15_TGCGAGAC_rep2
+  # - uvrDM0_TCTCTACT_rep2
+  # - uvrDM2_CTCTCGTC_rep2
+  # - uvrDM5_ATGGCATG_rep2
+  # - uvrDM15_GCAATGCA_rep2
+
   #mfd group
   # - mfd_I_5m_CPD_1
   # - mfd_I_10m_CPD_1
@@ -1031,8 +1073,8 @@ meta:
     medium: IPTG
     time: 1m
     strain: mfd
-    product: 64PP
-    damageSite: TC
+    product: CPD
+    damageSite: TT
     replicate: 2
 
 

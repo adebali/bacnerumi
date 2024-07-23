@@ -8,8 +8,8 @@ rule bedGraphToBigWig:
                 category="BigWig"),
     log:
         "logs/rule/analysis/{sample}/{sample}_bedGraphToBigWig_{strand}.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bedGraphToBigWig_{strand}.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bedGraphToBigWig_{strand}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -32,8 +32,8 @@ use rule bedGraphToBigWig as bedGraphToBigWig_readLength with:
                 # category="BigWig"),
     log:
         "logs/rule/analysis/{sample}/{sample}_bedGraphToBigWig_{strand}_{readLength}.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bedGraphToBigWig_{strand}_{readLength}.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bedGraphToBigWig_{strand}_{readLength}.benchmark.txt",
   
 
 rule bedGraphToBigWig_sim:
@@ -45,8 +45,8 @@ rule bedGraphToBigWig_sim:
                 category="BigWig"),
     log:
         "logs/rule/analysis/{samples}/simulation/{samples}_bedGraphToBigWig_{strand}.log",
-    benchmark:
-        "logs/rule/analysis/{samples}/simulation/{samples}_bedGraphToBigWig_{strand}.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{samples}/simulation/{samples}_bedGraphToBigWig_{strand}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

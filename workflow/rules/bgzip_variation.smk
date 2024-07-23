@@ -6,8 +6,8 @@ rule bgzip_variation:
         decomp=temp("resources/ref_genomes/{build}/variation.vcf"),
     log:
         "logs/rule/analysis/{build}/log/bgzip_variation.log",
-    benchmark:
-        "logs/rule/analysis/{build}/log/bgzip_variation.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{build}/log/bgzip_variation.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

@@ -9,8 +9,8 @@ rule plot_length:
         "{sample}",
     log:
         "logs/rule/figs/{sample}/{sample}_plot_length.log",
-    benchmark:
-        "logs/rule/figs/{sample}/{sample}_plot_length.benchmark.txt",
+    # benchmark:
+        # "logs/rule/figs/{sample}/{sample}_plot_length.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1

@@ -6,7 +6,7 @@ rule bowtie2_se:
         sample = rules.cutadapt_se.output.fastq,
         bowtie2=f"resources/ref_genomes/{build_}/Bowtie2/genome.1.bt2",
     output:
-        sam=temp("results/{sample}/{sample}.sam"),
+        sam="results/{sample}/{sample}.sam",
         bam="results/{sample}/{sample}.bam",
     params:
         ref_genome=rules.genome_build.params.base,
@@ -14,8 +14,8 @@ rule bowtie2_se:
         sample_id="{sample}"
     log:
         "logs/rule/analysis/{sample}/{sample}_bowtie2.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bowtie2.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bowtie2.benchmark.txt",
     resources:
         memory="64GB",
         cpu=16
@@ -53,8 +53,8 @@ rule bam2bed_se:
         q_trim=config["samtools_q_trim_se"], 
     log:
         "logs/rule/analysis/{sample}/{sample}_bam2bed.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bam2bed.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bam2bed.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -87,8 +87,8 @@ rule fixTo12:
     output: "results/{sample}/random/{sample}_fix12.bed"
     log:
         "logs/rule/analysis/{sample}/{sample}_fixTo12.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_fixTo12.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_fixTo12.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -132,8 +132,8 @@ rule randombed5:
         fields = lambda w: getSampleFields(config["meta"][w.sample]),
     log:
         "logs/rule/analysis/{sample}/{sample}_randombed5.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_randombed5.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_randombed5.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -227,8 +227,8 @@ rule sep_strands_original:
         minus="results/{sample}/{sample}_minus.bed",
     log:
         "logs/rule/analysis/{sample}/{sample}_sepStrands.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_sepStrands.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_sepStrands.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -253,8 +253,8 @@ rule sep_byLength:
         "results/{sample}/lengthSeparated/{sample}_{strand}_{readLength}.bed",
     log:
         "logs/rule/analysis/{sample}/{sample}_{readLength}_sepByLength_{strand}.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_{readLength}_sepByLength_{strand}.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_{readLength}_sepByLength_{strand}.benchmark.txt",
     resources:
         memory="4GB",
         cpu=1
@@ -273,8 +273,8 @@ rule length_dist_eachLength:
         "results/{sample}/{sample}_bedLength.txt",
     log:
         "logs/rule/analysis/{sample}/{sample}_bedLength.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_bedLength.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_bedLength.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -324,8 +324,8 @@ rule genomecov:
         bwtitle=lambda w: f'results/{project_}/bigwig/' + getTitle(w.sample) + f'_{w.strand}.bw',
     log:
         "logs/rule/analysis/{sample}/{sample}_{strand}_genomeCov.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_{strand}_genomeCov.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_{strand}_genomeCov.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -355,8 +355,8 @@ rule mergeReplicates:
     output: "results/mergedReplicates/{strain}_{strand}.bed"
     log:
         "logs/rule/analysis/mergeReplicates_{strain}_{strand}.log",
-    benchmark:
-        "logs/rule/analysis/mergeReplicates_{strain}_{strand}.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/mergeReplicates_{strain}_{strand}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -381,8 +381,8 @@ rule bigwigWithMergedBedReplicates:
         read=lambda w, input: mappedReads(input['bed']),
     log:
         "logs/rule/analysis/bigwigWithMergeBedReplicates_{strain}_{strand}.log",
-    benchmark:
-        "logs/rule/analysis/bigwigWithMergeBedReplicates_{strain}_{strand}.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/bigwigWithMergeBedReplicates_{strain}_{strand}.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -416,16 +416,16 @@ use rule genomecov as genomecov_readlength with:
         read=lambda w, input: mappedReads(input['bed']),
     log:
         "logs/rule/analysis/{sample}/{sample}_{strand}_{readLength}_genomeCov.log",
-    benchmark:
-        "logs/rule/analysis/{sample}/{sample}_{strand}_{readLength}_genomeCov.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/analysis/{sample}/{sample}_{strand}_{readLength}_genomeCov.benchmark.txt",
 
 rule mappableReads_TT:
     input: input4mappableReadsForDamageSite(config['sample'], 'TT')
     output: f'results/{project_}/mappableReads_TT.bed'
     log:
         "logs/rule/mappableReads_TT.log",
-    benchmark:
-        "logs/rule/mappableReads_TT.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/mappableReads_TT.benchmark.txt",
     resources:
         memory="16GB",
         cpu=1
@@ -444,8 +444,8 @@ use rule mappableReads_TT as mappableReads_TC with:
     output: f'results/{project_}/mappableReads_TC.bed'
     log:
         "logs/rule/mappableReads_TC.log",
-    benchmark:
-        "logs/rule/mappableReads_TC.benchmark.txt",
+    # benchmark:
+    #     "logs/rule/mappableReads_TC.benchmark.txt",
 
 # use rule genomecov_plus as genomecov_minus with:
 #     input:
