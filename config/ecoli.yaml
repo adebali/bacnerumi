@@ -130,22 +130,22 @@ sample:
   - 5x8WG1TT
   - 5x8WG20TT
   - 5x8WI608TT
-  # - uvrD0_GTGAATAT
-  # - uvrD2_ACAGGCGC
-  # - uvrD5_CATAGAGT
-  # - uvrD15_TGCGAGAC
-  # - uvrDM0_TCTCTACT
-  # - uvrDM2_CTCTCGTC
-  # - uvrDM5_CCAAGTCT
-  # - uvrDM15_TTGGACTC
-  # - uvrD0_GTGAATAT_rep2
-  # - uvrD2_ACAGGCGC_rep2
-  # - uvrD5_CATAGAGT_rep2
-  # - uvrD15_TGCGAGAC_rep2
-  # - uvrDM0_TCTCTACT_rep2
-  # - uvrDM2_CTCTCGTC_rep2
-  # - uvrDM5_ATGGCATG_rep2
-  # - uvrDM15_GCAATGCA_rep2
+  - uvrD0_GTGAATAT
+  - uvrD2_ACAGGCGC
+  - uvrD5_CATAGAGT
+  - uvrD15_TGCGAGAC
+  - uvrDM0_TCTCTACT
+  - uvrDM2_CTCTCGTC
+  - uvrDM5_CCAAGTCT
+  - uvrDM15_TTGGACTC
+  - uvrD0_GTGAATAT_rep2
+  - uvrD2_ACAGGCGC_rep2
+  - uvrD5_CATAGAGT_rep2
+  - uvrD15_TGCGAGAC_rep2
+  - uvrDM0_TCTCTACT_rep2
+  - uvrDM2_CTCTCGTC_rep2
+  - uvrDM5_ATGGCATG_rep2
+  - uvrDM15_GCAATGCA_rep2
   - mfd1mA_CTTATCGG_rep2
 
 
